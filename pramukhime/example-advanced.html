@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>
+	PramukhIME Advanced Example
+</title>
+    <meta name="Description" content="Basic Pramukh Type Pad to easily type in Assamese, Bengali, Bodo, Dogri, Gujarati, Hindi, Kannada, Konkani, Maithili, Malayalam, Manipuri, Marathi, Meitei (Manipuri), Nepali, Odia, Punjabi, Sanskrit, Santali (Ol Chiki), Sindhi, Sora, Tamil and Telugu" />
+		<meta name="keywords" content="Indian, Language, Assamese, Bengali, Bodo, Dogri, Gujarati, Hindi, Kannada, Konkani, Maithili, Malayalam, Meitei, Manipuri, Marathi, Nepali, Odia, Punjabi, Sanskrit, Santali, Ol Chiki, Sindhi, Sora, Tamil, Telugu, Type pad, Unicode, transliteration " />
+<meta name="copyright" content="Copyright © 2005-2023 Vishal Monpara" /><link rel="shortcut icon" href="img/pramukhime32.png" /><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora%7COpen+Sans&amp;display=swap" /><link type="text/css" href="css/bootstrap.min.css" rel="Stylesheet" />
+    <link type="text/css" href="css/pramukhindic.css" rel="Stylesheet" />
+	<style>
+		.btn i { font-family:pramukhindic; font-size:24px; line-height: 24px; font-style: normal; vertical-align:middle;}
+		iframe.detailed-help {height:400px; width:100%; overflow:auto;border:0px;}
+		#typingarea { font-family:"pramukhimefamily";  padding:0px; width:100%; overflow:auto;}
+	</style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <h1 class="navbar-brand">
+            <img src="img/pramukhime32.png" alt="logo" />PramukhIME Advanced Example
+
+            </h1>
+            
+    <div class="text-right">
+		<a href="https://www.pramukhime.com/contact-us" title="Send feedback to Vishal Monpara" target="_blank">
+			<img src="img/email32.png" alt="Email" />
+		</a>
+		&nbsp;
+		<a href="https://www.facebook.com/pages/PramukhIME-Pramukh-Type-Pad/164572296943090" title="Like us on Facebook" target="_blank">
+			<img src="img/facebook32.png" alt="Facebook" />
+		</a>
+		&nbsp;
+		<a href="https://twitter.com/PramukhIME" title="Follow us on Twitter" target="_blank">
+			<img src="img/twitter32.png" alt="Twitter" />
+		</a>
+		&nbsp;
+		<a href="https://www.youtube.com/channel/UC8ZjL0aY2KMKtIkO1eIC_7g" title="Youtube Channel" target="_blank">
+			<img src="img/youtube32.png" alt="Youtube Channel" />
+		</a>
+	</div>
+
+        </div>
+    </nav>
+        
+    <div class="container">
+        
+    <!--[if lt IE 9]>
+		<div class="alert alert-warning">Internet Explorer 6, 7, 8 is not supported by Bootstrap and jQuery. Please use latest Internet Explorer or other browsers like Chrome or Firefox.</div>
+	<![endif]-->
+
+	<div id="message" ></div>
+	<div class="card mt-4">
+		<div class="card-header">
+			<select id="drpLanguage" name="drpLanguage" title="Choose Language">
+				<option value="pramukhindic:assamese">Assamese</option>
+				<option value="pramukhindic:bengali">Bengali</option>
+				<option value="pramukhindic:bodo">Bodo</option>
+				<option value="pramukhindic:dogri">Dogri</option>
+				<option value="pramukhindic:gujarati">Gujarati</option>
+				<option value="pramukhindic:hindi">Hindi</option>
+				<option value="pramukhindic:kannada">Kannada</option>
+				<option value="pramukhindic:kashmiri">Kashmiri</option>
+				<option value="pramukhindic:konkani">Konkani</option>
+				<option value="pramukhindic:maithili">Maithili</option>
+				<option value="pramukhindic:malayalam">Malayalam</option>
+				<option value="pramukhindic:manipuri">Manipuri</option>
+				<option value="pramukhindic:marathi">Marathi</option>
+				<option value="pramukhindic:marathimodi">Marathi (Modi)</option>
+				<option value="pramukhindic:meitei">Meitei (Manipuri)</option>
+				<option value="pramukhindic:nepali">Nepali</option>
+				<option value="pramukhindic:odia">Odia</option>
+				<option value="pramukhindic:punjabi">Punjabi</option>
+				<option value="pramukhindic:sanskrit">Sanskrit</option>
+				<option value="pramukhindic:santali">Santali</option>
+				<option value="pramukhindic:sindhi">Sindhi</option>
+				<option value="pramukhindic:sora">Sora</option>
+				<option value="pramukhindic:tamil">Tamil</option>
+				<option value="pramukhindic:telugu">Telugu</option>
+				<option value="pramukhime:english" selected="selected">English (F9)</option>
+			</select>
+			<button type="button" class="btn btn-primary" id="showHelp" disabled="disabled" data-toggle="modal" data-target="#modalhelp" title="Show typing help" tabindex="-1">
+				<i class="pi-pramukhime-english-help"></i>
+			</button>
+			<button type="button" class="btn btn-primary"  id="showSettings" disabled="disabled"  data-toggle="modal" data-target="#modalsettings" title="Show settings" tabindex="-1">
+				<i class="pi-pramukhime-english-settings"></i>
+			</button>
+			<button type="button" class="btn btn-primary"  id="toggleLang" aria-pressed="false" title="Toggle language" tabindex="-1">
+				<i class="pi-pramukhime-english"></i>
+			</button>
+			<button type="button" class="btn btn-primary"  id="resetSettings" title="Reset Settings" tabindex="-1">
+				<span>Reset Settings</span>
+			</button>
+		</div>
+		<div class="card-body">
+			<span class="pi-icon pramukhime english-help"></span>
+			<textarea id="typingarea" name="typingarea" rows="10" cols="64" class="border" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" autosuggest="off" placeholder="Select your language from list and start typing"></textarea>
+		</div>
+	</div>
+	<div class="modal" id="modalhelp">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" data-toggle="tab" href="#quickhelp" id="quickhelplink">Quick Help</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" href="#detailedhelp" id="detailedhelplink">Detailed Help</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div id="quickhelp" class="tab-pane active">
+							PramukhIME is used for typing easily into Indian languages. It follows 'The way you speak, the way you type' rule. 
+							Following image shows which character will be shown by pressing which corresponding English letter. 
+							Example for various combination of letters are given only for one character but it is true for each alphabet.<br />
+							<div class="text-center">
+								<img src="img/pramukhime-english.png" alt="character map" id="pramukhimecharmap" />
+							</div>
+						</div>
+						<div id="detailedhelp" class="tab-pane">
+							<iframe src="help/pramukhime-english.html" id="pramukhimehelpdetailed" class="detailed-help"></iframe>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="modalsettings">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 id="typingruletitle">Language Settings</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group" id="typingrulesection">
+						<label for="typingrules">Advanced Typing Rule</label>
+						<select class="form-control" id="typingrules">
+							<option value="panchamakshar">Panchamakshar</option>
+							<option value="anusvar">Anusvar</option>
+						</select>
+					</div>
+					<div class="checkbox">
+						<label for="digitinenglish">
+							<input type="checkbox" id="digitinenglish" class="checkbox" />
+							Type Digit in English
+						</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="alert alert-warning my-3">This page will work only when you purchase Pro version. You may look at the code to get an idea how library with Pro features works.</div>
+	
+
+    </div>
+    <footer class="container-fluid bg-light mt-5 py-3">
+        <div class="container text-center small">
+            
+    
+Copyright &copy; 2005-2023 <a href="https://www.pramukhime.com" target="_blank" title="PramukhIME Website">Vishal Monpara</a> | 
+		Dedicated to <a href="https://pramukhswami.org" title="HH Pramukh Swami Maharaj" target="_blank">HH Pramukh Swami Maharaj</a>
+
+        </div>
+    </footer>
+    
+    
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/pramukhime.js"></script>
+	<script type="text/javascript" src="js/pramukhime-common.js"></script>
+	<script type="text/javascript" src="js/pramukhindic-i18n.js"></script>
+		
+	<script type="text/javascript">
+		// When document is ready, add events to buttons
+		$(document).ready(function () {
+			// focus on textarea
+			$("#typingarea").focus();
+			
+			$("#drpLanguage").on('change', function() {
+				// This code is required only for Standard version
+				// PRO version can handle this code through fired events
+				var newLanguage = this.value;
+				if (!newLanguage || newLanguage === "")
+					newLanguage = 'pramukhime:english';
+				// set new script
+				var lang = newLanguage.split(':');
+				pramukhIME.setLanguage(lang[1], lang[0]);
+				var data = pramukhIME.getLanguage();
+				var temp = pramukhIME.getLastLanguage();
+				data.lastKb = temp.kb;
+				data.lastLanguage = temp.language;
+				languageChangeCallback(data);
+			});
+			$('#typingrules').on('change', function () {
+				var currentLang = pramukhIME.getLanguage();
+				currentLang.advancedRule = this.value;
+				pramukhIME.setSettings([currentLang]);
+				// This code is required only for Standard version
+				// PRO version can handle this code through fired events
+				saveSettings();
+			});
+
+			$('#digitinenglish').click(function () {
+				var currentLang = pramukhIME.getLanguage();
+				var settings = pramukhIME.getSettings(currentLang);
+				settings[0].digitInEnglish = this.checked;
+				pramukhIME.setSettings(settings);
+				// This code is required only for Standard version
+				// PRO version can handle this code through fired events
+				saveSettings();
+			});
+
+			$('#resetSettings').click(function (e) {
+				if (confirm('Are you sure you want to reset the keyboard settings?')) {
+					resetSettings();
+					$('#message').html('Settings reset').removeClass().addClass('alert alert-success');
+					setTimeout(function () {
+						$('#message').html('').removeClass().addClass('alert');
+					}, 3000);
+				}
+				e.preventDefault();
+			});
+
+			$('#toggleLang').click(function (e) {
+				pramukhIME.toggleLanguage();
+				e.preventDefault();
+				// This code is required only for Standard version
+				// PRO version can handle this code through fired events
+				var data = pramukhIME.getLanguage();
+				var temp = pramukhIME.getLastLanguage();
+				data.lastKb = temp.kb;
+				data.lastLanguage = temp.language;
+				languageChangeCallback(data);
+            });
+
+            var isAccessValid = true, message = '<strong>Fix me:</strong> ';
+			
+            if (location.protocol == 'file:') {
+                isAccessValid = false;
+                message += "The example does not work using file protocol (Did you double click to open this file?). Open this file using a real webserver like IIS/Apache/Nginx.";
+            } else if (location.hostname !== 'localhost' || location.port) {
+                isAccessValid = false;
+                message += "The example works only on localhost with port 80 but it does not work on " + location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
+            }
+			
+
+            if (!isAccessValid) {
+                $('#message').html(message).addClass('alert alert-danger my-3');
+            }
+            else {
+                // Setup pramukhIME
+                
+
+                // Enable for the whole page
+                pramukhIME.enable();
+                // Register call back (PRO Version only)
+                //pramukhIME.on('languagechange', languageChangeCallback);
+                //pramukhIME.on('settingschange', saveSettings);
+                setupInitialSettings();
+            }
+			
+		});
+    </script>
+
+</body>
+</html>

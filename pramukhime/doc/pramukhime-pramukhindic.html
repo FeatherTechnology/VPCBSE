@@ -1,0 +1,5070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Class: PramukhIME</title>
+	<style>
+		
+		html
+		{
+			overflow: auto;
+			background-color: #fff;
+			font-size: 14px;
+		}
+
+		body
+		{
+			font-family: 'Open Sans', sans-serif;
+			line-height: 1.5;
+			color: #4d4e53;
+			background-color: white;
+		}
+
+		a, a:visited, a:active {
+			color: #0095dd;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		header
+		{
+			display: block;
+			padding: 0px 4px;
+		}
+
+		tt, code, kbd, samp {
+			font-family: Consolas, Monaco, 'Andale Mono', monospace;
+		}
+
+		.class-description {
+			font-size: 130%;
+			line-height: 140%;
+			margin-bottom: 1em;
+			margin-top: 1em;
+		}
+
+		.class-description:empty {
+			margin: 0;
+		}
+
+		#main {
+			float: left;
+			width: 70%;
+		}
+
+		article dl {
+			margin-bottom: 40px;
+		}
+
+		section
+		{
+			display: block;
+			background-color: #fff;
+			padding: 12px 24px;
+			border-bottom: 1px solid #ccc;
+			margin-right: 30px;
+		}
+
+		.variation {
+			display: none;
+		}
+
+		.signature-attributes {
+			font-size: 60%;
+			color: #aaa;
+			font-style: italic;
+			font-weight: lighter;
+		}
+
+		nav
+		{
+			display: block;
+			float: right;
+			margin-top: 28px;
+			width: 30%;
+			box-sizing: border-box;
+			border-left: 1px solid #ccc;
+			padding-left: 16px;
+		}
+
+		nav ul {
+			font-family: 'Lucida Grande', 'Lucida Sans Unicode', arial, sans-serif;
+			font-size: 100%;
+			line-height: 17px;
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+		}
+
+		nav ul a, nav ul a:visited, nav ul a:active {
+			font-family: Consolas, Monaco, 'Andale Mono', monospace;
+			line-height: 18px;
+			color: #4D4E53;
+		}
+
+		nav h3 {
+			margin-top: 12px;
+		}
+
+		nav li {
+			margin-top: 6px;
+		}
+
+		footer {
+			display: block;
+			padding: 6px;
+			margin-top: 12px;
+			font-style: italic;
+			font-size: 90%;
+		}
+
+		h1, h2, h3, h4 {
+			font-weight: 200;
+			margin: 0;
+		}
+
+		h1
+		{
+			font-family: 'Open Sans Light', sans-serif;
+			font-size: 48px;
+			letter-spacing: -2px;
+			margin: 12px 24px 20px;
+		}
+
+		h2, h3.subsection-title
+		{
+			font-size: 30px;
+			font-weight: 700;
+			letter-spacing: -1px;
+			margin-bottom: 12px;
+		}
+
+		h3
+		{
+			font-size: 24px;
+			letter-spacing: -0.5px;
+			margin-bottom: 12px;
+		}
+
+		h4
+		{
+			font-size: 18px;
+			letter-spacing: -0.33px;
+			margin-bottom: 12px;
+			color: #4d4e53;
+		}
+
+		h5, .container-overview .subsection-title
+		{
+			font-size: 120%;
+			font-weight: bold;
+			letter-spacing: -0.01em;
+			margin: 8px 0 3px 0;
+		}
+
+		h6
+		{
+			font-size: 100%;
+			letter-spacing: -0.01em;
+			margin: 6px 0 3px 0;
+			font-style: italic;
+		}
+
+		table
+		{
+			border-spacing: 0;
+			border: 0;
+			border-collapse: collapse;
+		}
+
+		td, th
+		{
+			border: 1px solid #ddd;
+			margin: 0px;
+			text-align: left;
+			vertical-align: top;
+			padding: 4px 6px;
+			display: table-cell;
+		}
+
+		thead tr
+		{
+			background-color: #ddd;
+			font-weight: bold;
+		}
+
+		th { border-right: 1px solid #aaa; }
+		tr > th:last-child { border-right: 1px solid #ddd; }
+
+		.ancestors { color: #999; }
+		.ancestors a
+		{
+			color: #999 !important;
+			text-decoration: none;
+		}
+
+		.clear
+		{
+			clear: both;
+		}
+
+		.important
+		{
+			font-weight: bold;
+			color: #950B02;
+		}
+
+		.yes-def {
+			text-indent: -1000px;
+		}
+
+		.type-signature {
+			color: #aaa;
+		}
+
+		.name, .signature {
+			font-family: Consolas, Monaco, 'Andale Mono', monospace;
+		}
+		
+		.pro {
+			border-radius: 5px;
+			background-color: #1876D2;
+			color: white;
+			padding:5px;
+		}
+
+		.details { margin-top: 14px; border-left: 2px solid #DDD; }
+		.details dt { width: 120px; float: left; padding-left: 10px;  padding-top: 6px; }
+		.details dd { margin-left: 70px; }
+		.details ul { margin: 0; }
+		.details ul { list-style-type: none; }
+		.details li { margin-left: 30px; padding-top: 6px; }
+		.details pre.prettyprint { margin: 0 }
+		.details .object-value { padding-top: 0; }
+
+		.description {
+			margin-bottom: 1em;
+			margin-top: 1em;
+		}
+
+		.code-caption
+		{
+			font-style: italic;
+			font-size: 107%;
+			margin: 0;
+		}
+
+		.prettyprint
+		{
+			border: 1px solid #ddd;
+			width: 80%;
+			overflow: auto;
+		}
+
+		.prettyprint.source {
+			width: inherit;
+		}
+
+		.prettyprint code
+		{
+			font-size: 100%;
+			line-height: 18px;
+			display: block;
+			padding: 4px 12px;
+			margin: 0;
+			background-color: #fff;
+			color: #4D4E53;
+		}
+
+		.prettyprint code span.line
+		{
+		  display: inline-block;
+		}
+
+		.prettyprint.linenums
+		{
+		  padding-left: 70px;
+		  -webkit-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		.prettyprint.linenums ol
+		{
+		  padding-left: 0;
+		}
+
+		.prettyprint.linenums li
+		{
+		  border-left: 3px #ddd solid;
+		}
+
+		.prettyprint.linenums li.selected,
+		.prettyprint.linenums li.selected *
+		{
+		  background-color: lightyellow;
+		}
+
+		.prettyprint.linenums li *
+		{
+		  -webkit-user-select: text;
+		  -moz-user-select: text;
+		  -ms-user-select: text;
+		  user-select: text;
+		}
+
+		.params .name, .props .name, .name code {
+			color: #4D4E53;
+			font-family: Consolas, Monaco, 'Andale Mono', monospace;
+			font-size: 100%;
+		}
+
+		.params td.description > p:first-child,
+		.props td.description > p:first-child
+		{
+			margin-top: 0;
+			padding-top: 0;
+		}
+
+		.params td.description > p:last-child,
+		.props td.description > p:last-child
+		{
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+
+		.disabled {
+			color: #454545;
+		}
+
+	</style>
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: PramukhIME</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>PramukhIME<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">PramukhIME is a lightweight, highly customizable JavaScript library for typing in Indian languages in any HTML elements like textbox, textarea, iframe or div using 3 lines of code. It supports Assamese, Bengali, Bodo, Dogri, Gujarati, Hindi, Kannada, Kashmiri, Konkani, Maithili, Malayalam, Manipuri, Marathi (Devanagari + Modi), Meitei, Nepali, Odia, Punjabi, Sanskrit, Santali (Ol Chiki), Sindhi, Sora, Tamil and Telugu languages.As soon as the library is loaded in the Webpage, it creates pramukhIME global object which will be used for IME functionality.<br><pre>&lt;html&gt;<br />&lt;head&gt;<br />    <strong>&lt;script type="text/javascript" src="js/pramukhime.js"&gt;&lt;/script&gt;</strong><br />&lt;/head&gt;<br />&lt;body&gt;<br />    &lt;input type="text" id="first_name"&gt;<br />    &lt;script language="javascript" type="text/javascript"&gt;<br />        <strong>pramukhIME.setLanguage("sanskrit", "pramukhindic"); <br />        pramukhIME.enable();</strong><br />    &lt;/script&gt;<br />&lt;/body&gt;<br />&lt;/html&gt;</pre><strong>Features</strong><ul><li>Requires only 3 lines of code to enable typing in Indian languages on any Web page.</li><li>Customizable keyboard shortcut to toggle between currently and last selected language.</li><li>Provides fine control over choosing HTML element to enable Indian language typing.</li><li>Supports multiple desktop and mobile browsers.</li><li>Once the javascript is downloaded into the browser, it works offline and does not need Internet connection</li><li>Ideal for HTML based mobile application and websites</li><li>For Indian languages, optionally digits can be kept in English and all other text can be converted into the selected language</li><li>Enhanced transliteration experience</li><li>For Hindi, Kannada and Kashmiri, user can set preference for typing Anusvar or Panchamakshar</li></ul><br /><strong>Defaults</strong><br />For all languages, DigitInEnglish = false so all the digits will be converted into the selected language<br /><br /><table><thead><tr><td>Language</td><td>Internal Name</td><td>Code</td><td>Default Typing Rule</td><td>Available Typing Rules</td></tr></thead><tbody><tr><td>Assamese</td><td>assamese</td><td>AS</td><td></td><td></td></tr><tr><td>Bengali</td><td>bengali</td><td>BN</td><td></td><td></td></tr><tr><td>Bodo</td><td>bodo</td><td>BO</td><td></td><td></td></tr><tr><td>Dogri</td><td>dogri</td><td>DO</td><td></td><td></td></tr><tr><td>Gujarati</td><td>gujarati</td><td>GU</td><td></td><td></td></tr><tr><td>Hindi</td><td>hindi</td><td>HI</td><td>anusvar</td><td>anusvar, panchamakshar</td></tr><tr><td>Kannada</td><td>kannada</td><td>KN</td><td>anusvar</td><td>anusvar, panchamakshar</td></tr><tr><td>Kashmiri</td><td>kashmiri</td><td>KS</td><td>anusvar</td><td>anusvar, panchamakshar</td></tr><tr><td>Konkani</td><td>konkani</td><td>KO</td><td></td><td></td></tr><tr><td>Maithili</td><td>maithili</td><td>MA</td><td></td><td></td></tr><tr><td>Malayalam</td><td>malayalam</td><td>ML</td><td></td><td></td></tr><tr><td>Manipuri</td><td>manipuri</td><td>MN</td><td></td><td></td></tr><tr><td>Marathi</td><td>marathi</td><td>MR</td><td></td><td></td></tr><tr><td>Marathi (Modi)</td><td>marathimodi</td><td>MR</td><td></td><td></td></tr><tr><td>Meitei</td><td>meitei</td><td>MT</td><td></td><td></td></tr><tr><td>Nepali</td><td>nepali</td><td>NE</td><td></td><td></td></tr><tr><td>Odia</td><td>odia</td><td>OD</td><td></td><td></td></tr><tr><td>Punjabi</td><td>punjabi</td><td>PA</td><td></td><td></td></tr><tr><td>Sanskrit</td><td>sanskrit</td><td>SA</td><td></td><td></td></tr><tr><td>Santali (Ol Chiki)</td><td>santali</td><td>ST</td><td></td><td></td></tr><tr><td>Sindhi</td><td>sindhi</td><td>SD</td><td></td><td></td></tr><tr><td>Sora</td><td>sora</td><td>SR</td><td></td><td></td></tr><tr><td>Tamil</td><td>tamil</td><td>TA</td><td></td><td></td></tr><tr><td>Telugu</td><td>telugu</td><td>TE</td><td></td><td></td></tr></tbody></table><br /><br /><span class="pro">Note:</span> When you work with API and need to provide keyboard name as input/parameter, use "pramukhindic" for Indian languages. Use "pramukhime" as keyboard name when dealing with English language.</div>
+        
+    
+</header>
+
+<article>
+
+			<h3 class="subsection-title">Summary</h3>
+			<table class="params">
+				<thead>
+					<tr>
+						 <th class="last">Constructor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><span class="type-signature"></span>new PramukhIME<span class="signature">()</span><span class="type-signature"></span>
+
+
+</td>
+					</tr>
+				</tbody>
+			</table>
+			<br />
+			<table class="params">
+				<thead>
+					<tr>
+						 <th class="last">Method Summary</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#convert">convert</a><span class="signature">(input<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {string}</span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Converts the text from English to the selected language. For each call to this function, it will reset the internal state.so calling this function for 'p', 'r', 'a', 'm', 'u', 'k', 'h' and combining the output may yield differentresult than calling the function for 'pramukh' depending on the selected language/keyboard
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#createPramukhIME">createPramukhIME</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="pramukhime-pramukhindic.html">PramukhIME</a>}</span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Gets a new PramukhIME object. This object is separate from global pramukhIME object. This object must be used carefully because it may interfere withglobal object.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#disable">disable</a><span class="signature">()</span><span class="type-signature"></span>
+
+
+<br />
+								Disables PramukhIME from the whole Web page. This method cleans up memory and resets internal state. It does <strong>not</strong> affect current/last selected keyboard/language/settings.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#disable">disable</a><span class="signature">(elems)</span><span class="type-signature"></span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Disables PramukhIME from individual HTML elements or whole Web page. This method cleans up memory and resets internal state. It does <strong>not</strong> affect current/last selected keyboard/language/settings.If the PramukhIME is enabled for the whole page and you want to exclude certain elements, use this function with arguments.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#enable">enable</a><span class="signature">()</span><span class="type-signature"></span>
+
+
+<br />
+								Enables PramukhIME on a Web page. You will be able to type in the selected language on textbox, textarea (or any element with element.isContentEditable = true in PRO version).For textbox and textarea, this library honors the maxlength, disabled and readonly attributes.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#enable">enable</a><span class="signature">(elems)</span><span class="type-signature"></span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Enables PramukhIME on a specified HTML element or a Web page. Using this method, you can enable PramukhIME for an element one by one. If you want to enable PramukhIME on the whole webpage, call this function without passing any argument. At the time of page load, you need to decidewhether you want to enable pramukhIME for the whole page or on individual elements. When PramukhIME is enabled for the whole page, you will be able to typein the selected language on textbox, textarea and any element with element.isContentEditable = true. This is useful when you are creating elements on-the-fly. You may individually add elements like iframe which has designMode = 'on' to enable the IME functionality. For textbox and textarea, this library honors the maxlength, disabled and readonly attributes.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getHelp">getHelp</a><span class="signature">()</span><span class="type-signature"> &rarr; {string}</span>
+
+
+<br />
+								Gets the detailed help file name of the currently selected language.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getHelp">getHelp</a><span class="signature">(urlTemplate)</span><span class="type-signature"> &rarr; {string}</span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Gets the detailed help file name of the currently selected language. If urlTemplate is provided, help file name will be created using the template otherwise the keyboard default help filename will be returned. urlTemplate supports '{language}', '{kb}', '{lastlanguage}' or '{lastkb}' tokens.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getHelpImage">getHelpImage</a><span class="signature">()</span><span class="type-signature"> &rarr; {string}</span>
+
+
+<br />
+								Gets the help image file name of the selected language and keyboard.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getHelpImage">getHelpImage</a><span class="signature">(urlTemplate)</span><span class="type-signature"> &rarr; {string}</span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Gets the help image file name of the selected language and keyboard. If urlTemplate is provided, image file name will be created using the template otherwise the keyboard default help image filename will be returned. urlTemplate supports '{language}', '{kb}', '{lastlanguage}' or '{lastkb}' tokens.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getLanguage">getLanguage</a><span class="signature">()</span><span class="type-signature"> &rarr; {LanguageOutput}</span>
+
+
+<br />
+								Gets the currently set language/keyboard name.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getLanguageCode">getLanguageCode</a><span class="signature">()</span><span class="type-signature"> &rarr; {string}</span>
+
+
+<br />
+								Gets the currently selected language code.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getLastLanguage">getLastLanguage</a><span class="signature">()</span><span class="type-signature"> &rarr; {LanguageOutput}</span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Gets the last selected language/keyboard name.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getSetting">getSetting</a><span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;PramukhIndicSettings>}</span>
+
+
+<br />
+								Gets the settings for the currently selected language/keyboard name. If the selected language is English, it will return Object.language. If the Indian language is selected, it will provide 2 records in an Array. 0th index element (1st record) contains digitInEnglish property with language:'all'and 1st index element (2nd record) contains advancedRule+advancedRuleValues properties.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getSettings">getSettings</a><span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;PramukhIndicSettings>}</span>
+
+
+<br />
+								Gets the settings for the all the available language/keyboard names except English. 0th index element (1st record) contains digitInEnglish property with language:'all'and all subsequent elements contain advancedRule+advancedRuleValues properties for their respective language.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#getToggleKey">getToggleKey</a><span class="signature">()</span><span class="type-signature"> &rarr; {ToggleKeyOutput}</span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Gets the shortcut key
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#hasHelp">hasHelp</a><span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span>
+
+
+<br />
+								Checks if the currently selected keyboard has help.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#hasSettings">hasSettings</a><span class="signature">()</span><span class="type-signature"></span>
+
+
+<br />
+								Checks if the currently selected keyboard has settings
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#off">off</a><span class="signature">(eventName, handler)</span><span class="type-signature"></span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Unsubscribe from "languagechange" or "settingschange" event.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#on">on</a><span class="signature">(eventName, handler)</span><span class="type-signature"></span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Subscribe to "languagechange" or "settingschange" event.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#resetSettings">resetSettings</a><span class="signature">()</span><span class="type-signature"></span>
+
+
+<br />
+								Resets keyboard settings for all the added keyboards.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#setLanguage">setLanguage</a><span class="signature">(languageName<span class="signature-attributes">non-null</span>, keyboardName<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span>
+
+
+<br />
+								Sets the new language so that user will start typing in the provided language using provided keyboard layout.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#setSettings">setSettings</a><span class="signature">(settings)</span><span class="type-signature"></span>
+
+
+<br />
+								Sets the settings. Setting object contains the language for which settings will be set
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#setToggleKey">setToggleKey</a><span class="signature">(key, ctrl, alt)</span><span class="type-signature"></span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Sets the shortcut key to switch between selected language and last selected language. Default value for toggle key is 120 (F9 key). If the user is typing in a text box(or any PramukhIME enabled HTML element) and presses F9 key, user can immediately starttyping in English (given the English is the last selected language). Press F9 key to again type in previously selected language.
+							</td>
+						</tr>
+					
+						<tr>
+							<td><span class="type-signature"></span><a href="#toggleLanguage">toggleLanguage</a><span class="signature">()</span><span class="type-signature"></span>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Toggles between selected language and last selected language
+							</td>
+						</tr>
+					
+					
+				</tbody>
+			</table>
+			<br />
+			<table class="params">
+				<thead>
+					<tr>
+						 <th class="last">Event Summary</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+						<tr>
+							<td><a href="#languagechange">languagechange</a>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Language change event
+							</td>
+						</tr>
+					
+						<tr>
+							<td><a href="#settingschange">settingschange</a>
+
+
+    <span class="pro">PRO Version Only</span>
+
+<br />
+								Settings change event
+							</td>
+						</tr>
+					
+					
+				</tbody>
+			</table>
+			<br />
+			<table class="params">
+				<thead>
+					<tr>
+						 <th class="last">Type Definition</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+						<tr>
+							<td><a href="#LanguageOutput">LanguageOutput</a>
+
+
+<br />
+								
+							</td>
+						</tr>
+					
+						<tr>
+							<td><a href="#PramukhIndicSettings">PramukhIndicSettings</a>
+
+
+<br />
+								digitInEnglish and advancedRule + advancedRuleValues are mutually exclusive properties. If the one is available, the other one will not be available
+							</td>
+						</tr>
+					
+						<tr>
+							<td><a href="#ToggleKeyOutput">ToggleKeyOutput</a>
+
+
+<br />
+								
+							</td>
+						</tr>
+					
+					
+				</tbody>
+			</table>
+
+
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2><hr />
+    
+
+    
+    <h4 class="name" id="PramukhIME"><span class="type-signature"></span>new PramukhIME<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr />
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+		<hr />
+        
+            
+
+    
+
+    
+    <h4 class="name" id="convert"><span class="type-signature"></span>convert<span class="signature">(input<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Converts the text from English to the selected language. For each call to this function, it will reset the internal state.so calling this function for 'p', 'r', 'a', 'm', 'u', 'k', 'h' and combining the output may yield differentresult than calling the function for 'pramukh' depending on the selected language/keyboard
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>input</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">English string</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#setLanguage">PramukhIME#setLanguage</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Converted text
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Adds the keyboard and sets the languagepramukhIME.setLanguage('sanskrit','pramukhindic');// Sanskrit is selected so the input "OM" will be converted to "ॐ"var output = pramukhIME.convert('OM');</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createPramukhIME"><span class="type-signature"></span>createPramukhIME<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="pramukhime-pramukhindic.html">PramukhIME</a>}</span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Gets a new PramukhIME object. This object is separate from global pramukhIME object. This object must be used carefully because it may interfere withglobal object.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns a new PramukhIME object
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="pramukhime-pramukhindic.html">PramukhIME</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="disable"><span class="type-signature"></span>disable<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Disables PramukhIME from the whole Web page. This method cleans up memory and resets internal state. It does <strong>not</strong> affect current/last selected keyboard/language/settings.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#enable">PramukhIME#enable</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Sets the languagepramukhIME.setLanguage('sanskrit','pramukhindic');// Enables pramukhIME on whole webpage so you can type in the selected language on all the textboxes/textareas etcpramukhIME.enable();// ... Now you should be able to type in "Sanskrit".// now disable the pramukhIME on whole webpage so that you can type in EnglishpramukhIME.disable();</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="disable"><span class="type-signature"></span>disable<span class="signature">(elems)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Disables PramukhIME from individual HTML elements or whole Web page. This method cleans up memory and resets internal state. It does <strong>not</strong> affect current/last selected keyboard/language/settings.If the PramukhIME is enabled for the whole page and you want to exclude certain elements, use this function with arguments.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>elems</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+|
+
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Element's id / javascript element object for which you want to disable PramukhIME. If not provided, it will disable the PramukhIME from the whole page.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#enable">PramukhIME#enable</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Sets the languagepramukhIME.setLanguage('sanskrit','pramukhindic');// Enables pramukhIME on whole webpage so you can type in the selected language on all the textboxes/textareas etcpramukhIME.enable();// ... Now you should be able to type in "Sanskrit".// now disable the pramukhIME on whole webpage so that you can type in EnglishpramukhIME.disable();// Now enable only for textbox with id = "searchbox"var elemArray = [document.getElementById('searchbox')]; // ORvar elemArray = ['searchbox'];pramukhIME.enable(elemArray);// ... Now you should be able to type in "Sanskrit" only in searchbox.// Now disable for the searchboxpramukhIME.disable(elemArray);</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="enable"><span class="type-signature"></span>enable<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Enables PramukhIME on a Web page. You will be able to type in the selected language on textbox, textarea (or any element with element.isContentEditable = true in PRO version).For textbox and textarea, this library honors the maxlength, disabled and readonly attributes.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#disable">PramukhIME#disable</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Sets the languagepramukhIME.setLanguage('sanskrit','pramukhindic');// Enables pramukhIME on whole webpage so you can type in the selected language on all the textboxes/textareas etcpramukhIME.enable();// ... Now you should be able to type in "Sanskrit".</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="enable"><span class="type-signature"></span>enable<span class="signature">(elems)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Enables PramukhIME on a specified HTML element or a Web page. Using this method, you can enable PramukhIME for an element one by one. If you want to enable PramukhIME on the whole webpage, call this function without passing any argument. At the time of page load, you need to decidewhether you want to enable pramukhIME for the whole page or on individual elements. When PramukhIME is enabled for the whole page, you will be able to typein the selected language on textbox, textarea and any element with element.isContentEditable = true. This is useful when you are creating elements on-the-fly. You may individually add elements like iframe which has designMode = 'on' to enable the IME functionality. For textbox and textarea, this library honors the maxlength, disabled and readonly attributes.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>elems</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+|
+
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of html element id or dom element object.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#disable">PramukhIME#disable</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Sets the languagepramukhIME.setLanguage('sanskrit','pramukhindic');// Enables pramukhIME on whole webpage so you can type in the selected language on all the textboxes/textareas etcpramukhIME.enable(); // OR// enable only for the textbox id='searchbox'var elemArray = ['searchbox'];pramukhIME.enable(elemArray);// ... Now you should be able to type in "Sanskrit".</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getHelp"><span class="type-signature"></span>getHelp<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Gets the detailed help file name of the currently selected language.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#hasHelp">PramukhIME#hasHelp</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Detailed help html file name
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>pramukhIME.setLanguage('sanskrit','pramukhindic');if (pramukhIME.hasHelp()) {	// Output = pramukhindic-sanskrit.html	document.getElementById('detailed_help_link').href = "help/" + pramukhIME.getHelp();}</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getHelp"><span class="type-signature"></span>getHelp<span class="signature">(urlTemplate)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Gets the detailed help file name of the currently selected language. If urlTemplate is provided, help file name will be created using the template otherwise the keyboard default help filename will be returned. urlTemplate supports '{language}', '{kb}', '{lastlanguage}' or '{lastkb}' tokens.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>urlTemplate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Url Template string containining tokens '{language}', '{kb}', '{lastlanguage}' or '{lastkb}'.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#hasHelp">PramukhIME#hasHelp</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Detailed help html file name
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Set languagepramukhIME.setLanguage('sanskrit','pramukhindic');// now change the language pramukhIME.setLanguage('gujarati', 'pramukhindic');if (pramukhIME.hasHelp()) {	// Output = pramukhindic-gujarati.html	document.getElementById('detailed_help_link').href = "help/" + pramukhIME.getHelp();	// Output = /help/show-help.php?lang=gujarati&amp;kb=pramukhindic&amp;lastlang=sanskrit&amp;lastkb=pramukhindic	document.getElementById('detailed_help_link').href = pramukhIME.getHelp("/help/show-help.php?lang={language}&amp;kb={kb}&amp;lastlang={lastlanguage}&amp;lastkb={lastkb}");}</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getHelpImage"><span class="type-signature"></span>getHelpImage<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Gets the help image file name of the selected language and keyboard.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#hasHelp">PramukhIME#hasHelp</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Help image file name
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>pramukhIME.setLanguage('sanskrit','pramukhindic');if (pramukhIME.hasHelp()) {	// Output = pramukhindic-sanskrit.png	document.getElementById('help_img').src = "img/" + pramukhIME.getHelpImage();}</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getHelpImage"><span class="type-signature"></span>getHelpImage<span class="signature">(urlTemplate)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Gets the help image file name of the selected language and keyboard. If urlTemplate is provided, image file name will be created using the template otherwise the keyboard default help image filename will be returned. urlTemplate supports '{language}', '{kb}', '{lastlanguage}' or '{lastkb}' tokens.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>urlTemplate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Url Template string containining tokens '{language}', '{kb}', '{lastlanguage}' or '{lastkb}'.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#hasHelp">PramukhIME#hasHelp</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Help image file name
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>pramukhIME.setLanguage('sanskrit','pramukhindic');if (pramukhIME.hasHelp()) {	// Output = pramukhindic-sanskrit.png	document.getElementById('help_img').src = "img/" + pramukhIME.getHelpImage();	// Output = http://cdn.mydomain.com/img/pramukhindic-sanskrit.jpeg	document.getElementById('help_img').src = pramukhIME.getHelpImage('http://cdn.static.com/img/{kb}-{language}.jpeg');}</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getLanguage"><span class="type-signature"></span>getLanguage<span class="signature">()</span><span class="type-signature"> &rarr; {LanguageOutput}</span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Gets the currently set language/keyboard name.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#setLanguage">PramukhIME#setLanguage</a>, <a href="pramukhime-pramukhindic.html#getLanguageCode">PramukhIME#getLanguageCode</a>, <a href="pramukhime-pramukhindic.html#LanguageOutput">PramukhIME#LanguageOutput</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">LanguageOutput</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>pramukhIME.setLanguage('sanskrit','pramukhindic');// output.language = 'sanskrit', output.kb = 'pramukhindic'var output = pramukhIME.getLanguage();</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getLanguageCode"><span class="type-signature"></span>getLanguageCode<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Gets the currently selected language code.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#getLanguage">PramukhIME#getLanguage</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>pramukhIME.setLanguage('sanskrit','pramukhindic');// output = 'SA'var output = pramukhIME.getLanguageCode();</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getLastLanguage"><span class="type-signature"></span>getLastLanguage<span class="signature">()</span><span class="type-signature"> &rarr; {LanguageOutput}</span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Gets the last selected language/keyboard name.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#setLanguage">PramukhIME#setLanguage</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Result object
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">LanguageOutput</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>pramukhIME.setLanguage('sanskrit','pramukhindic');// output.language = 'sanskrit', output.kb = 'pramukhindic'var output = pramukhIME.getLanguage();// Now set another languagepramukhIME.setLanguage('gujarati','pramukhindic');// Current language: output.language = 'gujarati', output.kb = 'pramukhindic'output = pramukhIME.getLanguage();// Last language: output.language = 'sanskrit', output.kb = 'pramukhindic'output = pramukhIME.getLastLanguage();</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getSetting"><span class="type-signature"></span>getSetting<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;PramukhIndicSettings>}</span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Gets the settings for the currently selected language/keyboard name. If the selected language is English, it will return Object.language. If the Indian language is selected, it will provide 2 records in an Array. 0th index element (1st record) contains digitInEnglish property with language:'all'and 1st index element (2nd record) contains advancedRule+advancedRuleValues properties.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#PramukhIndicSettings">PramukhIME#PramukhIndicSettings</a>, <a href="pramukhime-pramukhindic.html#getSettings">PramukhIME#getSettings</a>, <a href="pramukhime-pramukhindic.html#setSettings">PramukhIME#setSettings</a>, <a href="pramukhime-pramukhindic.html#hasSettings">PramukhIME#hasSettings</a>, , <a href="pramukhime-pramukhindic.html#resetSettings">PramukhIME#resetSettings</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;PramukhIndicSettings></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Add keyboard and select the languagepramukhIME.setLanguage('sanskrit','pramukhindic');if (pramukhIME.hasSettings()) {	// Refer to PramukhIndic.getSettings() for the output details.	var output = pramukhIME.getSetting();}</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getSettings"><span class="type-signature"></span>getSettings<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;PramukhIndicSettings>}</span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Gets the settings for the all the available language/keyboard names except English. 0th index element (1st record) contains digitInEnglish property with language:'all'and all subsequent elements contain advancedRule+advancedRuleValues properties for their respective language.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#PramukhIndicSettings">PramukhIME#PramukhIndicSettings</a>, <a href="pramukhime-pramukhindic.html#getSetting">PramukhIME#getSetting</a>, <a href="pramukhime-pramukhindic.html#setSettings">PramukhIME#setSettings</a>, <a href="pramukhime-pramukhindic.html#hasSettings">PramukhIME#hasSettings</a>, <a href="pramukhime-pramukhindic.html#resetSettings">PramukhIME#resetSettings</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;PramukhIndicSettings></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Add keyboard and select the languagepramukhIME.setLanguage('sanskrit','pramukhindic');if (pramukhIME.hasSettings()) {	// Refer to PramukhIndic.getSettings() for the output details.	var output = pramukhIME.getSetting();}</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getToggleKey"><span class="type-signature"></span>getToggleKey<span class="signature">()</span><span class="type-signature"> &rarr; {ToggleKeyOutput}</span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Gets the shortcut key
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>code=120(=F9 key), ctrl=false, alt=false</li>
+        </ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#setToggleKey">PramukhIME#setToggleKey</a>, <a href="pramukhime-pramukhindic.html#ToggleKeyOutput">PramukhIME#ToggleKeyOutput</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Result object
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ToggleKeyOutput</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// output.code = 120 (=F9 key), output.ctrl = false, output.alt = false. This is the default toggle keyvar output = pramukhIME.getToggleKey();</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="hasHelp"><span class="type-signature"></span>hasHelp<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Checks if the currently selected keyboard has help.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#getHelp">PramukhIME#getHelp</a>, <a href="pramukhime-pramukhindic.html#getHelpImage">PramukhIME#getHelpImage</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Add keyboard and select the languagepramukhIME.setLanguage('sanskrit','pramukhindic');if (pramukhIME.hasHelp()) {	// Make the help image/help url/toolbar button visible} else {	// Hide the help image/help url/toolbar button}</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="hasSettings"><span class="type-signature"></span>hasSettings<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Checks if the currently selected keyboard has settings
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#getSetting">PramukhIME#getSetting</a>, <a href="pramukhime-pramukhindic.html#getSettings">PramukhIME#getSettings</a>, <a href="pramukhime-pramukhindic.html#setSettings">PramukhIME#setSettings</a>, <a href="pramukhime-pramukhindic.html#resetSettings">PramukhIME#resetSettings</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Add keyboard and select the languagepramukhIME.setLanguage('sanskrit','pramukhindic');if (pramukhIME.hasSettings()) {	// Make the settings UI visible} else {	// Hide settings UI}</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="off"><span class="type-signature"></span>off<span class="signature">(eventName, handler)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Unsubscribe from "languagechange" or "settingschange" event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>eventName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">It must be "languagechange" or "settingschange"</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>handler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback method.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#setLanguage">PramukhIME#setLanguage</a>, <a href="pramukhime-pramukhindic.html#setSettings">PramukhIME#setSettings</a>, <a href="pramukhime-pramukhindic.html#on">PramukhIME#on</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>function languageChangeCallback (e) {	// Write code to update the language dropdown to select the new language}// Subscribe language change eventpramukhIME.on('languagechange', languageChangeCallback);// Unsubscribe from eventpramukhIME.off('languagechange', languageChangeCallback);</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="on"><span class="type-signature"></span>on<span class="signature">(eventName, handler)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Subscribe to "languagechange" or "settingschange" event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>eventName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">It must be "languagechange" or "settingschange"</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>handler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback method.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#setLanguage">PramukhIME#setLanguage</a>, <a href="pramukhime-pramukhindic.html#setSettings">PramukhIME#setSettings</a>, <a href="pramukhime-pramukhindic.html#off">PramukhIME#off</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>function languageChangeCallback (e) {	// Write code to update the language dropdown to select the new language}// Subscribe language change eventpramukhIME.on('languagechange', languageChangeCallback);</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="resetSettings"><span class="type-signature"></span>resetSettings<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Resets keyboard settings for all the added keyboards.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#setSettings">PramukhIME#setSettings</a>, <a href="pramukhime-pramukhindic.html#hasSettings">PramukhIME#hasSettings</a>, <a href="pramukhime-pramukhindic.html#getSettings">PramukhIME#getSettings</a>, <a href="pramukhime-pramukhindic.html#getSetting">PramukhIME#getSetting</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<h5>Fires:</h5>
+<ul>
+    <li><a href="pramukhime-pramukhindic.html#event:settingschange">PramukhIME#event:settingschange</a> Fires "settingschange" event if the settings are changed for the added keyboard layout</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setLanguage"><span class="type-signature"></span>setLanguage<span class="signature">(languageName<span class="signature-attributes">non-null</span>, keyboardName<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Sets the new language so that user will start typing in the provided language using provided keyboard layout.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>languageName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Language name.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keyboardName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Name of the keyboard layout</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#getLanguage">PramukhIME#getLanguage</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<h5>Fires:</h5>
+<ul>
+    <li><a href="pramukhime-pramukhindic.html#event:languagechange">PramukhIME#event:languagechange</a> Fires "languagechange" event if the language you are trying to set the currently selected language</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Set the language to SanskritpramukhIME.setLanguage('sanskrit', 'pramukhindic');</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setSettings"><span class="type-signature"></span>setSettings<span class="signature">(settings)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+<div class="description">
+    Sets the settings. Setting object contains the language for which settings will be set
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>settings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">This should be the same object as the keyboard plugin's setSettings method expects.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#getSettings">PramukhIME#getSettings</a>, <a href="pramukhime-pramukhindic.html#hasSettings">PramukhIME#hasSettings</a>, <a href="pramukhime-pramukhindic.html#getSetting">PramukhIME#getSetting</a>, <a href="pramukhime-pramukhindic.html#resetSettings">PramukhIME#resetSettings</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<h5>Fires:</h5>
+<ul>
+    <li><a href="pramukhime-pramukhindic.html#event:settingschange">PramukhIME#event:settingschange</a> Fires "settingschange" event if the settings are changed for the added keyboard layout</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Set languagepramukhIME.setLanguage('sanskrit', 'pramukhindic');if (pramukhIME.hasSettings()) {	// Refer to PramukhIndic.setSettings() for more details.	var settings = [{language:'all', kb:'pramukhindic', digitInEnglish: true}];	pramukhIME.setSettings(settings);}</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setToggleKey"><span class="type-signature"></span>setToggleKey<span class="signature">(key, ctrl, alt)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Sets the shortcut key to switch between selected language and last selected language. Default value for toggle key is 120 (F9 key). If the user is typing in a text box(or any PramukhIME enabled HTML element) and presses F9 key, user can immediately starttyping in English (given the English is the last selected language). Press F9 key to again type in previously selected language.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Key Code in KeyDown event.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ctrl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Hold down Control key for switching between English and selected language?</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>alt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Hold down Alt key for switching between English and selected language?</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#getToggleKey">PramukhIME#getToggleKey</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Set the toggle key to Ctrl + F8 so that when user presses Ctrl + F8, it toggles between current and last selected languagepramukhIME.setToggleKey(119, true, false); // 119 = keycode for F8</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toggleLanguage"><span class="type-signature"></span>toggleLanguage<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Toggles between selected language and last selected language
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="pramukhime-pramukhindic.html#getLanguage">PramukhIME#getLanguage</a>, <a href="pramukhime-pramukhindic.html#getLastLanguage">PramukhIME#getLastLanguage</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Set languagepramukhIME.setLanguage('sanskrit', 'pramukhindic');// Now change the languagepramukhIME.setLanguage('gujarati', 'pramukhindic');// Now toggle the language pramukhIME.toggleLanguage();// output.language = sanskrit, output.kb = pramukhindicvar output = pramukhIME.getLanguage();// Now toggle the language againpramukhIME.toggleLanguage();// output.language = gujarati, output.kb = pramukhindicoutput = pramukhIME.getLanguage();</code></pre>
+
+
+<hr />
+
+        
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+		<hr />
+        
+                
+<h4 class="name" id="LanguageOutput">LanguageOutput</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>language</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">language name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>kb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">keyboard name</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<hr />
+
+            
+                
+<h4 class="name" id="PramukhIndicSettings">PramukhIndicSettings</h4>
+
+
+
+
+<div class="description">
+    digitInEnglish and advancedRule + advancedRuleValues are mutually exclusive properties. If the one is available, the other one will not be available
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>language</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Language name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>kb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Keyboard name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>digitInEnglish</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Digit in English</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>advancedRule</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Currently selected advanced rule</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>advancedRuleValues</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">All available advanced rule values</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<hr />
+
+            
+                
+<h4 class="name" id="ToggleKeyOutput">ToggleKeyOutput</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Key code</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ctrl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Control key flag</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>alt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Alt key flag</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<hr />
+
+            
+    
+
+    
+        <h3 class="subsection-title">Events</h3>
+		<hr />
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:languagechange">languagechange</h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Language change event
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>language</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Newly selected language name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>kb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Newly selected keyboard name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lastLanguage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Last selected language</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lastKb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Last selected keyboard name</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// define language change handlerfunction languageChangeCallback (e) {	// We will have following properties available in the argument	// e.language = 'sanskrit', e.kb = 'pramukhindic', e.lastLanguage = 'english', e.lastKb = 'pramukhime'}// Subscribe to language change eventpramukhIME.on('languagechange', languageChangeCallback);// At this moment, we have the English as the default language// Setting the language would automatically call languageChangeCallback functionpramukhIME.setLanguage('sanskrit','pramukhindic');</code></pre>
+
+
+<hr />
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:settingschange">settingschange</h4>
+    
+
+    
+
+
+
+
+    <span class="pro">PRO Version Only</span>
+
+
+
+<div class="description">
+    Settings change event
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// define settings change handlerfunction settingsChangeCallback () {	// Setting change event does not have any argument. It is just for notification.	// Show/Hide/Modify settings UI based on selected language}// Subscribe to settings change eventpramukhIME.on('settingschange', settingsChangeCallback);// Set languagepramukhIME.setLanguage('sanskrit','pramukhindic');var settings = [{language:'all', kb:'pramukhindic', digitInEnglish: true}];// As we set the settings, it will call the callback handler "settingsChangeCallback"pramukhIME.setSettings(settings);</code></pre>
+
+
+<hr />
+
+        
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h3>Classes</h3><ul><li><a href="pramukhime-pramukhindic.html">PramukhIME</a></li></ul><h3>Events</h3><ul><li><a href="pramukhime-pramukhindic.html#event:languagechange">languagechange</a></li><li><a href="pramukhime-pramukhindic.html#event:settingschange">settingschange</a></li></ul>
+</nav>
+
+<br class="clear">
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+.required{
+	color:red;
+	font-weight: bold;
+}
+.error{
+	color:red;
+}
+.unit-table{
+width:50%;
+margin: auto;
+text-align: center;
+}
+.stocktable{
+width:97%;
+margin: auto;
+text-align: center;
+}
+th, td{
+	text-align: center;
+}
+th{
+  background-color: #5090c0;
+  font-weight: bold;
+  color: white;
+}
+.iblue{
+color:blue;
+}
+.ired{
+	color: red;
+}
+
+#box{
+  width: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 10px black;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  padding: 10px;
+  text-align: center;
+  display: none;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=file] {
+border-style: none;
+}
+.mul-select{
+            width: 100%;
+        }
+.itembutton{
+  width: 38%;
+  border-radius: 3px;
+}
+.itembutton1{
+  width: 38%;
+  border-radius: 3px;
+  float: right;
+  margin: 3px;
+}
+.inbutton{
+  background-color:#5090c0;
+  color:white;
+  width:70%;
+}
+
+
+.modal{
+  display: none;
+  left: 50%;
+  transform: translate(-50%, 3%);
+  width:50%;
+  margin: auto;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #5090c0;
+  margin: auto;
+  border: 1px solid #888;
+}
+
+/* The Close Button */
+.close, .bulkclose, .itemstockclose, .itemlocationclose, .purposeclose, .areaclose{
+  color: #aaaaaa;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 95%;
+}
+
+.close:hover, .close:focus, .bulkclose:hover, .bulkclose:focus, .itemstockclose:hover, .itemstockclose:focus, .itemlocationclose:hover, .itemlocationclose:focus, .purposeclose:hover, .purposeclose:focus, .areaclose:hover{
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.trialbalance-th-color{
+  background-color: #5090c0;;
+}
+.TableHead{
+  background: #5090c0;;
+}
+.trialbalance-header{
+  font-weight: bold;
+    color: #af4850;
+    font-family: Arial;
+} 
+.text-align-left{
+  text-align: left;
+}
+.trialbalance-subhead-color{
+  font-weight: bold;
+  color: #457d45;
+  font-family: Arial;
+}
+.trialbalance-ledgerheader-color{
+  font-weight: bold;
+  color: #31708f;
+  font-family: Arial;
+}
+.trialbalanceradio_button_align{
+  text-align: center;
+}
+.trialbalance_hasondate{
+  justify-content: center;
+}   
