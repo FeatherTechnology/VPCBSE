@@ -184,7 +184,6 @@ FROM (
             $lastyr_grpfeeQry = $connect->query("SELECT (SUM(lyfd.fee_received)  + SUM(lyfd.scholarship)) as paid_grp_amount 
             FROM `last_year_fees` lyf 
             JOIN last_year_fees_details lyfd ON lyf.id = lyfd.admission_fees_ref_id 
-            JOIN group_course_fee gcf ON lyfd.fees_id = gcf.grp_course_id 
             WHERE lyf.admission_id = '$studentList->student_id' AND lyf.academic_year = '$academicyear' ");
             if ($lastyr_grpfeeQry->rowCount() > 0) {
                 $lastyr_grp_amount = $lastyr_grpfeeQry->fetch()['paid_grp_amount'];
