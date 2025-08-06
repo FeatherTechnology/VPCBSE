@@ -51,11 +51,11 @@ if ($feeType == '1') { //group
         <tbody>
 
             <?php
-            $getStudentListQry = $connect->query("SELECT sc.student_id, sc.admission_number, sc.student_name, std.standard, sh.section, sh.extra_curricular, sh.transportarearefid, sh.studentstype, sc.sms_sent_no ,sc.leaving_term 
+            $getStudentListQry = $connect->query("SELECT sc.student_id, sc.admission_number, sc.student_name, std.standard, sh.section, sh.extra_curricular, sh.transportarearefid, sh.studentstype, sc.sms_sent_no ,sh.leaving_term 
 FROM `student_creation` sc 
 LEFT JOIN student_history sh ON sc.student_id = sh.student_id
 JOIN standard_creation std ON sh.standard = std.standard_id
-WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sc.leaving_term !='1' && sc.leaving_term !='5'  && sc.school_id = '$school_id' ORDER BY sc.student_name ASC");
+WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sh.leaving_term !='1' && sh.leaving_term !='5'  && sc.school_id = '$school_id' ORDER BY sc.student_name ASC");
             $i = 1;
             $grnd_total_fee = 0;
             $grnd_paid_fee = 0;
@@ -180,11 +180,11 @@ WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.stan
         <tbody>
 
             <?php
-            $getStudentListQry = $connect->query("SELECT sc.student_id, sc.admission_number, sc.student_name, std.standard, sh.section, sh.extra_curricular, sh.transportarearefid, sh.studentstype, sc.sms_sent_no ,sc.leaving_term
+            $getStudentListQry = $connect->query("SELECT sc.student_id, sc.admission_number, sc.student_name, std.standard, sh.section, sh.extra_curricular, sh.transportarearefid, sh.studentstype, sc.sms_sent_no ,sh.leaving_term
 FROM `student_creation` sc 
 LEFT JOIN student_history sh ON sc.student_id = sh.student_id
 JOIN standard_creation std ON sh.standard = std.standard_id
-WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sc.leaving_term !='1' && sc.leaving_term !='5' && sc.school_id = '$school_id' && sh.extra_curricular !='' ORDER BY sc.student_name ASC");
+WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sh.leaving_term !='1' && sh.leaving_term !='5' && sc.school_id = '$school_id' && sh.extra_curricular !='' ORDER BY sc.student_name ASC");
             $i = 1;
             $grnd_total_fee = 0;
             $grnd_paid_fee = 0;
@@ -286,7 +286,7 @@ WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.stan
 FROM `student_creation` sc 
 LEFT JOIN student_history sh ON sc.student_id = sh.student_id
 JOIN standard_creation std ON sh.standard = std.standard_id
-WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sc.leaving_term !='1' && sc.leaving_term !='5'  && sc.school_id = '$school_id' ORDER BY sc.student_name ASC");
+WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sh.leaving_term !='1' && sh.leaving_term !='5'  && sc.school_id = '$school_id' ORDER BY sc.student_name ASC");
             $i = 1;
             $grnd_total_fee = 0;
             $grnd_paid_fee = 0;
@@ -379,7 +379,7 @@ WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.stan
 FROM `student_creation` sc 
 LEFT JOIN student_history sh ON sc.student_id = sh.student_id
 JOIN standard_creation std ON sc.standard = std.standard_id
-WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sc.leaving_term !='1' && sc.leaving_term !='5'  && sc.school_id = '$school_id' ORDER BY sc.student_name ASC ");
+WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sh.leaving_term !='1' && sh.leaving_term !='5'  && sc.school_id = '$school_id' ORDER BY sc.student_name ASC ");
             $i = 1;
             $grnd_total_fee = 0;
             $grnd_paid_fee = 0;
@@ -493,11 +493,11 @@ WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.stan
         <tbody>
 
             <?php
-            $getStudentListQry = $connect->query("SELECT sc.student_id, sc.admission_number, sc.student_name, std.standard, sh.section, sh.extra_curricular, sh.transportarearefid, sh.studentstype, sc.sms_sent_no,sc.leaving_term
+            $getStudentListQry = $connect->query("SELECT sc.student_id, sc.admission_number, sc.student_name, std.standard, sh.section, sh.extra_curricular, sh.transportarearefid, sh.studentstype, sc.sms_sent_no,sh.leaving_term
 FROM `student_creation` sc 
 LEFT JOIN student_history sh ON sc.student_id = sh.student_id
 JOIN standard_creation std ON sh.standard = std.standard_id
-WHERE sh.academic_year  = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sc.leaving_term !='1' && sc.leaving_term !='5'  && sc.school_id = '$school_id' && sh.transportarearefid !='' ORDER BY sc.student_name ASC ");
+WHERE sh.academic_year  = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && sh.section = '$stdSection' && sh.leaving_term !='1' && sh.leaving_term !='5'  && sc.school_id = '$school_id' && sh.transportarearefid !='' ORDER BY sc.student_name ASC ");
             $i = 1;
             $grnd_total_fee = 0;
             $grnd_paid_fee = 0;

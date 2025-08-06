@@ -63,9 +63,9 @@ WHERE std.status = '0' ");
             WHERE
                 sh.standard = '$standardList->standard_id'
                 AND sh.academic_year = '$academicyear'
-                AND sc.leaving_term NOT IN (1, 5)
+                AND sh.leaving_term NOT IN (1, 5)
                 AND sc.school_id = '$school_id'
-                AND sc.status = 0
+                AND sh.status = 0
                 AND sc.medium = '$stdMedium'
         )
     )
@@ -85,7 +85,7 @@ WHERE std.status = '0' ");
             AND afd.fees_table_name = 'grptable'
             AND sh.standard = '$standardList->standard_id'
             AND sc.school_id = '$school_id'
-            AND sc.status = 0
+            AND sh.status = 0
             AND sh.academic_year = '$academicyear'
     )
     - (
@@ -101,7 +101,7 @@ WHERE std.status = '0' ");
                     sh.standard = '$standardList->standard_id'
                     AND sh.academic_year = '$academicyear'
                     AND fc.fees_table_name = 'grptable'
-                    AND fc.fees_id = gcf.grp_course_id AND sc.status = 0
+                    AND fc.fees_id = gcf.grp_course_id AND sh.status = 0
             ),
             0
         )
@@ -131,9 +131,9 @@ ORDER BY
             WHERE 
                 sh.standard = '$standardList->standard_id'
                 AND sh.academic_year = '$academicyear'
-                AND sc.leaving_term NOT IN (1, 5)
+                AND sh.leaving_term NOT IN (1, 5)
                 AND sc.school_id = '$school_id'
-                AND sc.status = 0
+                AND sh.status = 0
                 AND sc.medium = '$stdMedium'
         )
     ) 
@@ -150,7 +150,7 @@ ORDER BY
             AND afd.fees_table_name = 'amenitytable'
             AND sh2.standard = '$standardList->standard_id'
             AND sh2.academic_year = '$academicyear'
-            AND sc2.status = 0
+            AND sh2.status = 0
     )
     - (
         SELECT COALESCE(SUM(fc.scholarship_amount), 0)
@@ -162,7 +162,7 @@ ORDER BY
             AND sh3.academic_year = '$academicyear'
             AND fc.fees_table_name = 'amenitytable'
             AND fc.fees_id = af.amenity_fee_id
-            AND sc3.status = 0
+            AND sh3.status = 0
     ) AS bookpending_for_standard
     FROM 
         fees_master fm
@@ -200,7 +200,7 @@ ORDER BY
                     WHERE sh3.standard = '$standardList->standard_id'
                         AND sh3.academic_year = '$academicyear'
                         AND fc.fees_table_name = 'transport'
-                        AND fc.fees_id = acp.particulars_id AND sc3.status = 0
+                        AND fc.fees_id = acp.particulars_id AND sh3.status = 0
                 ), 0)
                 - COALESCE((
                     SELECT 
@@ -214,8 +214,8 @@ ORDER BY
                         AND sh.standard = '$standardList->standard_id' 
                         AND sh.academic_year = '$academicyear'
                         AND sc.school_id = '$school_id'
-                        AND sc.status = 0
-                        AND sc.leaving_term NOT IN (1, 5)
+                        AND sh.status = 0
+                        AND sh.leaving_term NOT IN (1, 5)
                         AND sc.medium = '$stdMedium'
                 ), 0)
             ) AS transport_pending,
@@ -261,9 +261,9 @@ ORDER BY
             JOIN student_history sh ON sc.student_id = sh.student_id
             WHERE sh.standard = '$standardList->standard_id'
                 AND sh.academic_year = '$academicyear'
-                AND sc.leaving_term NOT IN (1, 5)
+                AND sh.leaving_term NOT IN (1, 5)
                 AND sc.school_id = '$school_id'
-                AND sc.status = 0
+                AND sh.status = 0
                 AND sc.medium = '$stdMedium'
             GROUP BY sh.transportarearefid
         ) sc ON ac.area_id = sc.area_id

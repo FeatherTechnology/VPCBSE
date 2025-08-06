@@ -35,7 +35,7 @@ if(isset($_POST['student_name1'])){
 if($medium != '' && $standard != ''  && $section != ''){
   
   // make a query to fetch the student names list
-  $sql2 = "SELECT sc.student_id, sc.student_name FROM student_creation sc LEFT JOIN student_history sh ON sc.student_id = sh.student_id WHERE sc.medium = '$medium' AND sh.standard = '$standard' AND sh.section = '$section' AND sc.school_id='$school_id' AND sh.academic_year ='$year_id' AND sc.status = 0 ";
+  $sql2 = "SELECT sc.student_id, sc.student_name FROM student_creation sc LEFT JOIN student_history sh ON sc.student_id = sh.student_id WHERE sc.medium = '$medium' AND sh.standard = '$standard' AND sh.section = '$section' AND sc.school_id='$school_id' AND sh.academic_year ='$year_id' AND sh.status = 0 ";
   $result2 = mysqli_query($mysqli, $sql2);
 
   // check if there are any students in the result

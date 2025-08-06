@@ -55,7 +55,11 @@
                                             $school_id = $_SESSION['school_id'];
                                         }
 
-                                        $ctselect = "SELECT * FROM student_creation WHERE status = 1 AND deleted_student = 1 AND school_id = '$school_id'";
+                                       if (isset($_SESSION['academic_year'])) {
+                                                $academicyear = $_SESSION['academic_year'];
+                                        }
+
+                                        $ctselect = "SELECT stdc.*, sc.standard as std_name, stdc.admission_number, stdc.facility,stdc.flat_no,stdc.street, stdc.area_locatlity, stdc.district,stdc.pincode FROM student_creation stdc JOIN student_history sh ON stdc.student_id = sh.student_id JOIN standard_creation sc ON sh.standard = sc.standard_id WHERE  stdc.school_id='$school_id' AND sh.status = '1' AND sh.academic_year = '$academicyear'";
                                         $ctresult = $mysqli->query($ctselect);
                                         if ($ctresult->num_rows > 0) {
                                             $i = 1;
@@ -66,7 +70,7 @@
                                                     <td><?php echo $i; ?></td>
                                                     <td><?php if (isset($ct["student_name"])) { echo $ct["student_name"];
                                                         } ?></td>
-                                                    <td><?php if (isset($ct["standard"])) { echo $ct["standard"];
+                                                    <td><?php if (isset($ct["std_name"])) { echo $ct["std_name"];
                                                         } ?></td>
                                                     <td><?php if (isset($ct["section"])) { echo $ct["section"];
                                                         } ?></td>
@@ -74,7 +78,8 @@
                                                         } ?></td>
                                                     <td><?php if (isset($ct["admission_number"])) { echo $ct["admission_number"];
                                                         } ?></td>
-                                                    <td><?php if (isset($ct["flat_no"])) { echo $ct["flat_no"], $ct["street"], $ct["area_locatlity"], $ct["district"], $ct["pincode"];
+                                                    <td><?php if (isset($ct["flat_no"])) { echo $ct["flat_no"] . ', ' . $ct["street"] . ', ' . $ct["area_locatlity"] . ', ' . $ct["district"] . ', ' . $ct["pincode"];
+;
                                                         } ?></td>
                                                     <td><?php if (isset($ct["reason"])) { echo $ct["reason"];
                                                         } ?></td>

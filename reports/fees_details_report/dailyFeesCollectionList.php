@@ -114,7 +114,7 @@ JOIN student_history sh ON
 JOIN standard_creation STD ON
     sh.standard = std.standard_id
 WHERE
-    af.receipt_date = '$from_date' AND afd.fee_received > 0 AND sc.school_id = '$school_id' AND sc.status = 0
+    af.receipt_date = '$from_date' AND afd.fee_received > 0 AND sc.school_id = '$school_id' AND sh.status = 0
 GROUP BY
     afd.id,
     af.receipt_no,
@@ -144,7 +144,7 @@ JOIN student_history sh ON
 JOIN standard_creation STD ON
     sh.standard = std.standard_id
 WHERE
-    taf.receipt_date = '$from_date' AND tafd.fee_received > 0 AND sc.school_id = '$school_id' AND sc.status = 0
+    taf.receipt_date = '$from_date' AND tafd.fee_received > 0 AND sc.school_id = '$school_id' AND sh.status = 0
 GROUP BY
     tafd.id,
     taf.receipt_no,
@@ -173,7 +173,7 @@ JOIN student_history sh ON
 JOIN standard_creation STD ON
     sh.standard = std.standard_id
 WHERE
-    lyf.receipt_date = '$from_date' AND lyfd.fee_received > 0 AND sc.school_id = '$school_id' AND sc.status = 0
+    lyf.receipt_date = '$from_date' AND lyfd.fee_received > 0 AND sc.school_id = '$school_id' AND sh.status = 0
 GROUP BY
         lyfd.id,
     lyf.receipt_no,

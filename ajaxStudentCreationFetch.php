@@ -20,7 +20,7 @@ $column = array(
     'status'
 );
 
-$query = "SELECT stdc.*, sc.standard as std_name, stdc.admission_number, stdc.facility FROM student_creation stdc JOIN student_history sh ON stdc.student_id = sh.student_id JOIN standard_creation sc ON sh.standard = sc.standard_id WHERE  stdc.school_id='$school_id' AND stdc.status = '0'AND sh.academic_year = '$year_id'";
+$query = "SELECT stdc.*, sc.standard as std_name, stdc.admission_number, stdc.facility FROM student_creation stdc JOIN student_history sh ON stdc.student_id = sh.student_id JOIN standard_creation sc ON sh.standard = sc.standard_id WHERE  stdc.school_id='$school_id' AND sh.status = '0'AND sh.academic_year = '$year_id'";
 
 if($_POST['search']!="");
 {

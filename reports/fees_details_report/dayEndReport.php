@@ -35,7 +35,7 @@ if ($dateSelect == 'singledate') {
         JOIN student_creation sc ON af.admission_id = sc.student_id 
           JOIN student_history sh ON sh.student_id = sc.student_id AND af.academic_year = sh.academic_year
         JOIN standard_creation std ON sh.standard = std.standard_id 
-        WHERE af.receipt_date ='$singleDate' AND afd.fee_received > 0 AND afd.fees_table_name = '$feeType' AND sc.school_id = '$school_id' AND sc.status = 0
+        WHERE af.receipt_date ='$singleDate' AND afd.fee_received > 0 AND afd.fees_table_name = '$feeType' AND sc.school_id = '$school_id' AND sh.status = 0
         GROUP BY 
              afd.id,
             af.receipt_no, 
@@ -50,7 +50,7 @@ if ($dateSelect == 'singledate') {
         JOIN student_creation sc ON lyf.admission_id = sc.student_id 
              JOIN student_history sh ON sh.student_id = sc.student_id AND lyf.academic_year = sh.academic_year
         JOIN standard_creation std ON sh.standard = std.standard_id 
-        WHERE lyf.receipt_date ='$singleDate' AND lyfd.fee_received > 0 AND sc.school_id = '$school_id' AND sc.status = 0 HAVING lastyearFees > 0 ORDER BY CAST(SUBSTRING(receipt_no, LOCATE('-', receipt_no) + 1) AS UNSIGNED)";
+        WHERE lyf.receipt_date ='$singleDate' AND lyfd.fee_received > 0 AND sc.school_id = '$school_id' AND sh.status = 0 HAVING lastyearFees > 0 ORDER BY CAST(SUBSTRING(receipt_no, LOCATE('-', receipt_no) + 1) AS UNSIGNED)";
     } else if ($feeType == 'transport') { //Transport
         $Qry = "SELECT taf.receipt_no, sc.admission_number, sc.student_name, std.standard, sh.section, 0 AS grp_fee, 0 AS extra_fee, tafd.fee_received AS transportFees 
         FROM `transport_admission_fees` taf 
@@ -58,7 +58,7 @@ if ($dateSelect == 'singledate') {
         JOIN student_creation sc ON taf.admission_id = sc.student_id 
               JOIN student_history sh ON sh.student_id = sc.student_id AND taf.academic_year = sh.academic_year 
         JOIN standard_creation std ON sh.standard = std.standard_id 
-        WHERE taf.receipt_date ='$singleDate' AND tafd.fee_received > 0 AND sc.school_id = '$school_id' AND sc.status = 0 GROUP BY 
+        WHERE taf.receipt_date ='$singleDate' AND tafd.fee_received > 0 AND sc.school_id = '$school_id' AND sh.status = 0 GROUP BY 
         tafd.id,
              taf.receipt_no,
             sc.admission_number, 
@@ -163,7 +163,7 @@ if ($dateSelect == 'singledate') {
         JOIN student_creation sc ON af.admission_id = sc.student_id 
         JOIN student_history sh ON sh.student_id = sc.student_id AND af.academic_year = sh.academic_year
         JOIN standard_creation std ON sh.standard = std.standard_id 
-        WHERE af.receipt_date ='$from_date' AND afd.fee_received > 0 AND afd.fees_table_name = '$feeType' AND sc.school_id = '$school_id' AND sc.status = 0
+        WHERE af.receipt_date ='$from_date' AND afd.fee_received > 0 AND afd.fees_table_name = '$feeType' AND sc.school_id = '$school_id' AND sh.status = 0
         GROUP BY 
             afd.id,
             af.receipt_no, 
@@ -178,7 +178,7 @@ if ($dateSelect == 'singledate') {
         JOIN student_creation sc ON lyf.admission_id = sc.student_id
         JOIN student_history sh ON sh.student_id = sc.student_id AND lyf.academic_year = sh.academic_year 
         JOIN standard_creation std ON sh.standard = std.standard_id 
-        WHERE lyf.receipt_date ='$from_date' AND lyfd.fee_received > 0 AND sc.school_id = '$school_id' AND sc.status = 0 HAVING lastyearFees > 0 ORDER BY CAST(SUBSTRING(receipt_no, LOCATE('-', receipt_no) + 1) AS UNSIGNED)";
+        WHERE lyf.receipt_date ='$from_date' AND lyfd.fee_received > 0 AND sc.school_id = '$school_id' AND sh.status = 0 HAVING lastyearFees > 0 ORDER BY CAST(SUBSTRING(receipt_no, LOCATE('-', receipt_no) + 1) AS UNSIGNED)";
                 } else if ($feeType == 'transport') { //Transport
                     $Qry = "SELECT taf.receipt_no, sc.admission_number, sc.student_name, std.standard, sh.section, 0 AS grp_fee, 0 AS extra_fee, tafd.fee_received AS transportFees, taf.receipt_date 
         FROM `transport_admission_fees` taf 
@@ -186,7 +186,7 @@ if ($dateSelect == 'singledate') {
         JOIN student_creation sc ON taf.admission_id = sc.student_id 
         JOIN student_history sh ON sh.student_id = sc.student_id AND taf.academic_year = sh.academic_year 
         JOIN standard_creation std ON sh.standard = std.standard_id 
-        WHERE taf.receipt_date ='$from_date' AND tafd.fee_received > 0 AND sc.school_id = '$school_id' AND sc.status = 0 GROUP BY 
+        WHERE taf.receipt_date ='$from_date' AND tafd.fee_received > 0 AND sc.school_id = '$school_id' AND sh.status = 0 GROUP BY 
         tafd.id,
              taf.receipt_no,
             sc.admission_number, 

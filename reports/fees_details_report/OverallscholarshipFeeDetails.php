@@ -71,7 +71,7 @@ WHERE
     AND sc.medium = '$stdMedium' 
     AND sh.standard = '$stdStandard' 
     AND ('$stdSection' = '0' OR sh.section = '$stdSection') 
-    AND sc.status = '0' 
+    AND sh.status = '0' 
     AND (fc.fees_table_name NOT IN ('transport', 'extratable', 'amenitytable'))
     AND sc.school_id = '$school_id'
     AND (COALESCE(fc.scholarship_amount, 0) > 0)
@@ -104,7 +104,7 @@ WHERE
     AND sc.medium = '$stdMedium' 
     AND sh.standard = '$stdStandard' 
     AND ('$stdSection' = '0' OR sh.section = '$stdSection') 
-    AND sc.status = '0' 
+    AND sh.status = '0' 
     AND afd.fees_table_name NOT IN ('transport', 'extratable', 'amenitytable')
     AND sc.school_id = '$school_id'
     AND (COALESCE(afd.scholarship, 0) > 0)
@@ -182,7 +182,7 @@ WHERE
         LEFT JOIN fees_concession fc ON sc.student_id = fc.student_id
         LEFT JOIN extra_curricular_activities_fee ecaf ON ecaf.extra_fee_id = fc.fees_id AND fc.fees_table_name = 'extratable'
         LEFT JOIN amenity_fee af ON af.amenity_fee_id = fc.fees_id AND fc.fees_table_name = 'amenitytable'
-        WHERE fc.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && ($stdSection = '0' OR sh.section = '$stdSection') && sc.status = '0' && fc.fees_table_name != 'transport' && fc.fees_table_name != 'grptable'  && sc.school_id = '$school_id' AND (COALESCE(fc.scholarship_amount, 0) > 0)";
+        WHERE fc.academic_year = '$academicyear' && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && ($stdSection = '0' OR sh.section = '$stdSection') && sh.status = '0' && fc.fees_table_name != 'transport' && fc.fees_table_name != 'grptable'  && sc.school_id = '$school_id' AND (COALESCE(fc.scholarship_amount, 0) > 0)";
 
             // Second query
             $query2 = "SELECT DISTINCT sc.admission_number, sc.student_name, std.standard, sh.section, sc.sms_sent_no,  
@@ -202,7 +202,7 @@ WHERE
         LEFT JOIN admission_fees_details afd ON afd.admission_fees_ref_id = afs.id
         LEFT JOIN extra_curricular_activities_fee ecaf ON ecaf.extra_fee_id = afd.fees_id AND afd.fees_table_name = 'extratable'
         LEFT JOIN amenity_fee af ON af.amenity_fee_id = afd.fees_id AND afd.fees_table_name = 'amenitytable'
-        WHERE afs.academic_year = '$academicyear'  && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && ($stdSection = '0' OR sh.section = '$stdSection') && sc.status = '0' && afd.fees_table_name != 'transport' && afd.fees_table_name != 'grptable'  && sc.school_id = '$school_id' AND (COALESCE(afd.scholarship, 0) > 0)";
+        WHERE afs.academic_year = '$academicyear'  && sc.medium = '$stdMedium' &&  sh.standard = '$stdStandard' && ($stdSection = '0' OR sh.section = '$stdSection') && sh.status = '0' && afd.fees_table_name != 'transport' && afd.fees_table_name != 'grptable'  && sc.school_id = '$school_id' AND (COALESCE(afd.scholarship, 0) > 0)";
 
             $grnd_total_amount = 0;
 
@@ -286,7 +286,7 @@ WHERE fc.academic_year = '$lastyear'
 AND sc.medium = '$stdMedium' 
 AND sh.standard = '$stdStandard'
 AND ($stdSection = '0' OR sc.section = '$stdSection') 
-AND sc.status = '0' 
+AND sh.status = '0' 
 AND sc.school_id = '$school_id' 
 AND COALESCE(fc.scholarship_amount, 0) > 0";
 
@@ -312,7 +312,7 @@ WHERE afs.academic_year = '$lastyear'
 AND sc.medium = '$stdMedium' 
 AND sh.standard = '$stdStandard'
 AND ($stdSection = '0' OR sc.section = '$stdSection') 
-AND sc.status = '0' 
+AND sh.status = '0' 
 AND sc.school_id = '$school_id' 
 AND COALESCE(afd.scholarship, 0) > 0";
 
@@ -403,7 +403,7 @@ WHERE
     AND sc.medium = '$stdMedium' 
     AND sh.standard = '$stdStandard' 
     AND ('$stdSection' = '0' OR sc.section = '$stdSection') 
-    AND sc.status = '0' 
+    AND sh.status = '0' 
     AND fc.fees_table_name = 'transport' 
     AND sc.school_id = '$school_id' 
     AND (COALESCE(fc.scholarship_amount, 0) > 0)
@@ -439,7 +439,7 @@ WHERE
     AND sc.medium = '$stdMedium' 
     AND sh.standard = '$stdStandard' 
     AND ('$stdSection' = '0' OR sc.section = '$stdSection') 
-    AND sc.status = '0' 
+    AND sh.status = '0' 
     AND sc.school_id = '$school_id' 
     AND (COALESCE(afd.scholarship, 0) > 0)
 ";
