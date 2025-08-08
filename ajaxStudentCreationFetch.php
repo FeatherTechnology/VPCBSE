@@ -41,7 +41,7 @@ if($_POST['search']!="");
             OR stdc.standard LIKE '%".$_POST['search']."%'
             OR gender LIKE '%".$_POST['search']."%'
             OR flat_no LIKE '%".$_POST['search']."%'
-            OR stdc.status LIKE '%".$_POST['search']."%') ";
+            OR sh.status LIKE '%".$_POST['search']."%') ";
         }
     }
 }

@@ -59,7 +59,7 @@
                                                 $academicyear = $_SESSION['academic_year'];
                                         }
 
-                                        $ctselect = "SELECT stdc.*, sc.standard as std_name, stdc.admission_number, stdc.facility,stdc.flat_no,stdc.street, stdc.area_locatlity, stdc.district,stdc.pincode FROM student_creation stdc JOIN student_history sh ON stdc.student_id = sh.student_id JOIN standard_creation sc ON sh.standard = sc.standard_id WHERE  stdc.school_id='$school_id' AND sh.status = '1' AND sh.academic_year = '$academicyear'";
+                                        $ctselect = "SELECT stdc.*, sc.standard as std_name, stdc.admission_number, stdc.facility,stdc.flat_no,stdc.street, stdc.area_locatlity, stdc.district,stdc.pincode,sh.reason FROM student_creation stdc JOIN student_history sh ON stdc.student_id = sh.student_id JOIN standard_creation sc ON sh.standard = sc.standard_id WHERE  stdc.school_id='$school_id' AND sh.status = '1' AND sh.academic_year = '$academicyear'";
                                         $ctresult = $mysqli->query($ctselect);
                                         if ($ctresult->num_rows > 0) {
                                             $i = 1;
