@@ -10,7 +10,7 @@ SUM(CASE WHEN sc.gender='Male' THEN 1 ELSE 0 END) AS boysCount,
 SUM(CASE WHEN sc.gender='Female' THEN 1 ELSE 0 END) AS girlsCount    
 FROM `student_creation` sc
 JOIN student_history sh ON sh.student_id = sc.student_id
- WHERE status = 0 && sc.school_id = '$school_id' AND sh.academic_year ='$academic_year' ");
+ WHERE sh.status = 0 && sc.school_id = '$school_id' AND sh.academic_year ='$academic_year' ");
 $studentInfo = $getStudentCount->fetchObject();
 
 

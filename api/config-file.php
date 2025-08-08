@@ -1,5 +1,5 @@
 <?php
-$URLPATH="http://".$_SERVER['HTTP_HOST']."/"; 
+$URLPATH="http://".$_SERVER['HTTP_HOST']."/VPCBSE/"; 
 
 $HOSTPATH = $URLPATH;
 $ROOTPATH = $_SERVER['DOCUMENT_ROOT']."/";

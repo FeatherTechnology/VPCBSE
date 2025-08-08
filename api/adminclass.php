@@ -3089,7 +3089,7 @@ class admin
 	//  get TempStudentList
 	public function getStudentList($mysqli, $school_id, $year_id)
 	{
-		$qry = "SELECT sc.* FROM student_creation sc LEFT JOIN student_history sh ON sc.student_id =sh.student_id WHERE sc.school_id='$school_id' AND sh.academic_year='$year_id' AND status=0 ORDER BY sc.student_id DESC";
+		$qry = "SELECT sc.* FROM student_creation sc LEFT JOIN student_history sh ON sc.student_id =sh.student_id WHERE sc.school_id='$school_id' AND sh.academic_year='$year_id' AND sh.status=0 ORDER BY sc.student_id DESC";
 		// SELECT * FROM student_creation WHERE 1 AND status=0 ORDER BY student_id DESC
 		$res = $mysqli->query($qry) or die("Error in Get All Records" . $mysqli->error);
 		$detailrecords = array();

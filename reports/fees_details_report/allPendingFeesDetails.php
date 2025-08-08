@@ -48,11 +48,11 @@ if (isset($_POST['stdSection'])) {
     <tbody>
 
         <?php
-        $getStudentListQry = $connect->query("SELECT sc.student_id, sc.admission_number, sc.student_name, std.standard, sh.section, sh.extra_curricular, sh.transportarearefid, sh.studentstype, sc.sms_sent_no,sc.leaving_term
+        $getStudentListQry = $connect->query("SELECT sc.student_id, sc.admission_number, sc.student_name, std.standard, sh.section, sh.extra_curricular, sh.transportarearefid, sh.studentstype, sc.sms_sent_no,sh.leaving_term
 FROM `student_creation` sc 
 LEFT JOIN student_history sh ON sc.student_id = sh.student_id
 JOIN standard_creation std ON sh.standard = std.standard_id
-WHERE sh.academic_year  = '$academicyear' && sc.medium = '$stdMedium' && sh.standard = '$stdStandard' && sc.leaving_term !='1' && sc.leaving_term !='5' &&  sh.section = '$stdSection' && sc.school_id = '$school_id' ORDER BY sc.student_name ASC");
+WHERE sh.academic_year  = '$academicyear' && sc.medium = '$stdMedium' && sh.standard = '$stdStandard' && sh.leaving_term !='1' && sh.leaving_term !='5' &&  sh.section = '$stdSection' && sc.school_id = '$school_id' ORDER BY sc.student_name ASC");
         $i = 1;
         $ls_pending = 0;
         $grnd_term1_pending = 0;
@@ -72,8 +72,8 @@ WHERE sh.academic_year  = '$academicyear' && sc.medium = '$stdMedium' && sh.stan
                 $student_type_cndtn = "(fm.student_type = '$studentsType')";
             }
             $leavingTerm = $studentList->leaving_term;
-    
-                 $getLastYearPending = $connect->query("SELECT 
+
+            $getLastYearPending = $connect->query("SELECT 
     SUM(pending) AS total_balance_tobe_paid
 FROM (
     -- First subquery for 'grptable'
@@ -184,7 +184,6 @@ FROM (
             $lastyr_grpfeeQry = $connect->query("SELECT (SUM(lyfd.fee_received)  + SUM(lyfd.scholarship)) as paid_grp_amount 
             FROM `last_year_fees` lyf 
             JOIN last_year_fees_details lyfd ON lyf.id = lyfd.admission_fees_ref_id 
-            JOIN group_course_fee gcf ON lyfd.fees_id = gcf.grp_course_id 
             WHERE lyf.admission_id = '$studentList->student_id' AND lyf.academic_year = '$academicyear' ");
             if ($lastyr_grpfeeQry->rowCount() > 0) {
                 $lastyr_grp_amount = $lastyr_grpfeeQry->fetch()['paid_grp_amount'];
@@ -248,10 +247,32 @@ ORDER BY
                 // Logic to handle pending amounts based on leaving term
                 if ($leavingTerm == 2) {
                     // If the student leaves after 1st term, only show 1st term pending amount
-                    $term_pending[] = ($termPendingInfo['grp_particulars'] == 'I Term Fee') ? $currentPending : 0;
+                    $particulars = $termPendingInfo['grp_particulars'];
+
+                    if (
+                        strpos($particulars, 'I') !== false &&
+                        strpos($particulars, 'II') === false &&
+                        strpos($particulars, 'III') === false
+                    ) {
+
+                        $term_pending[] = $currentPending;
+                    } else {
+                        $term_pending[] = 0;
+                    }
                 } elseif ($leavingTerm == 3) {
                     // If the student leaves after 2nd term, show pending for the 1st and 2nd terms
-                    $term_pending[] = ($termPendingInfo['grp_particulars'] <= 'II Term Fee') ? $currentPending : 0;
+                    $particulars = $termPendingInfo['grp_particulars'];
+
+                    if (
+                        strpos($particulars, 'I') !== false &&
+                        strpos($particulars, 'II') !== false &&
+                        strpos($particulars, 'III') === false
+                    ) {
+
+                        $term_pending[] = $currentPending;
+                    } else {
+                        $term_pending[] = 0;
+                    }
                 } else {
                     // If student stays beyond the 2nd term, show all pending terms
                     $term_pending[] = $currentPending;
@@ -314,7 +335,7 @@ ORDER BY
             }
             $extra_id = ($studentList->extra_curricular) ? $studentList->extra_curricular : '0';
             $getExtraPendingQry = $connect->query("SELECT COALESCE(( ecaf.extra_amount - (SELECT (COALESCE(SUM(afd.fee_received), 0) + COALESCE(SUM(afd.scholarship), 0)) FROM admission_fees_details afd JOIN admission_fees af ON afd.admission_fees_ref_id = af.id WHERE afd.fees_id = ecaf.extra_fee_id AND afd.fees_table_name = 'extratable' AND af.admission_id = '$studentList->student_id') ), 0) - COALESCE((SELECT SUM(scholarship_amount) FROM fees_concession WHERE student_id ='$studentList->student_id' AND fees_table_name ='extratable' AND fees_id = ecaf.extra_fee_id),0) AS extraPending, ecaf.extra_amount AS extraAmnt FROM extra_curricular_activities_fee ecaf WHERE ecaf.extra_fee_id IN ($extra_id) ");
-            $extra_pending =0;
+            $extra_pending = 0;
             if ($getExtraPendingQry->rowCount() > 0) {
                 while ($extrapendingInfo = $getExtraPendingQry->fetch()) {
                     $extraPending = $extrapendingInfo['extraPending'];

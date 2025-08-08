@@ -34,7 +34,7 @@ if(isset($_POST['stdSection'])){
     <tbody>
 
 <?php
-$getStudentListQry = $connect->query("SELECT student_name, std.standard, sh.section, father_name, mother_name, admission_number, gender, flat_no, street, area_locatlity, district, pincode, sms_sent_no FROM `student_creation` sc JOIN student_history sh  ON sh.student_id = sc.student_id JOIN standard_creation std ON sh.standard = std.standard_id WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' && sh.standard = '$stdStandard' && sh.section = '$stdSection' && sc.status = '0' && sc.school_id = '$school_id' ");
+$getStudentListQry = $connect->query("SELECT student_name, std.standard, sh.section, father_name, mother_name, admission_number, gender, flat_no, street, area_locatlity, district, pincode, sms_sent_no FROM `student_creation` sc JOIN student_history sh  ON sh.student_id = sc.student_id JOIN standard_creation std ON sh.standard = std.standard_id WHERE sh.academic_year = '$academicyear' && sc.medium = '$stdMedium' && sh.standard = '$stdStandard' && sh.section = '$stdSection' && sh.status = '0' && sc.school_id = '$school_id' ");
 while($studentList = $getStudentListQry->fetchObject()){
 ?>
     <tr>

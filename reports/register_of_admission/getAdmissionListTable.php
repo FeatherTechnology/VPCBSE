@@ -53,7 +53,7 @@ if(isset($_POST['stdStandard'])){
 
 <?php
 
-$getStudentListQry = $connect->query("SELECT * FROM `student_creation` sc JOIN student_history sh  ON sh.student_id = sc.student_id JOIN standard_creation std ON sh.standard = std.standard_id WHERE sc.medium = '$stdMedium' && sh.standard = '$stdStandard' && sc.status = '0' && sc.school_id = '$school_id' AND sh.academic_year='$academic_year' ");
+$getStudentListQry = $connect->query("SELECT * FROM `student_creation` sc JOIN student_history sh  ON sh.student_id = sc.student_id JOIN standard_creation std ON sh.standard = std.standard_id WHERE sc.medium = '$stdMedium' && sh.standard = '$stdStandard' && sh.status = '0' && sc.school_id = '$school_id' AND sh.academic_year='$academic_year' ");
 $i=1;
 while($studentList = $getStudentListQry->fetchObject()){
 ?>

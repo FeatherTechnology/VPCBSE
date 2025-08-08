@@ -11,12 +11,12 @@ if(isset($_SESSION['school_id'])){
 ///////////////////////////////////Total fee START///////////////////////////////////////
 $totalamount=0;
 
-$getgrpFeeTotalQry = $connect->query("SELECT COALESCE(SUM(gcf.grp_amount) * (SELECT COUNT(*) from student_creation where standard=fm.standard  AND medium=fm.medium AND year_id=fm.academic_year AND leaving_term!=1 AND leaving_term!=5 AND (
+$getgrpFeeTotalQry = $connect->query("SELECT COALESCE(SUM(gcf.grp_amount) * (SELECT COUNT(sh.student_id) from student_creation sc LEFT JOIN student_history sh ON sc.student_id = sh.student_id where sh.standard=fm.standard  AND sc.medium=fm.medium AND sh.academic_year=fm.academic_year AND sh.leaving_term!=1 AND sh.leaving_term!=5 AND (
                     CASE
-                        WHEN studentstype IN ('1', '2') THEN 
-                            (fm.student_type = studentstype OR fm.student_type = '4')
+                        WHEN sh.studentstype IN ('1', '2') THEN 
+                            (fm.student_type = sh.studentstype OR fm.student_type = '4')
                         ELSE
-                            fm.student_type = studentstype
+                            fm.student_type = sh.studentstype
                     END
                 ) ),0) AS totalgrpamnt 
 FROM `fees_master` fm 
@@ -43,12 +43,12 @@ WHERE fm.academic_year = '$academicyear'
 $extraFeeInfo = $getExtraFeeTotalQry->fetchObject();
     $totalamount += $extraFeeInfo->extraAmnt;
 
-$getamenityFeeTotalQry = $connect->query("SELECT COALESCE(SUM(af.amenity_amount) * (SELECT COUNT(*) from student_creation where standard=fm.standard  AND medium=fm.medium AND year_id=fm.academic_year AND  leaving_term!=1 AND leaving_term!=5 AND (
+$getamenityFeeTotalQry = $connect->query("SELECT COALESCE(SUM(af.amenity_amount) * (SELECT COUNT(sh.student_id) from student_creation sc LEFT JOIN student_history sh ON sc.student_id = sh.student_id where sh.standard=fm.standard  AND sc.medium=fm.medium AND sh.academic_year=fm.academic_year AND sh.leaving_term!=1 AND sh.leaving_term!=5 AND (
                     CASE
-                        WHEN studentstype IN ('1', '2') THEN 
-                            (fm.student_type = studentstype OR fm.student_type = '4')
+                        WHEN sh.studentstype IN ('1', '2') THEN 
+                            (fm.student_type = sh.studentstype OR fm.student_type = '4')
                         ELSE
-                            fm.student_type = studentstype
+                            fm.student_type = sh.studentstype
                     END
                 ) ),0) AS totalAmenityamnt 
 FROM `fees_master` fm 

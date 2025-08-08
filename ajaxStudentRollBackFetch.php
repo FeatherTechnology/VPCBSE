@@ -16,10 +16,10 @@ if(isset($_POST['section'])){
 }
 
 if($type == '1'){
-    $ctselect="SELECT sc.student_id, sc.admission_number, sc.student_name, sc.section, stdc.standard, sh.standard as std_id FROM student_creation sc JOIN student_history sh ON sc.student_id = sh.student_id JOIN standard_creation stdc ON sh.standard = stdc.standard_id WHERE sc.deleted_student = '0' AND sc.school_id = '$school_id' AND sh.standard NOT IN (13, 19, 20, 21, 22, 23) AND sh.academic_year = '$academic_year'"; 
+    $ctselect="SELECT sc.student_id, sc.admission_number, sc.student_name, sc.section, stdc.standard, sh.standard as std_id FROM student_creation sc JOIN student_history sh ON sc.student_id = sh.student_id JOIN standard_creation stdc ON sh.standard = stdc.standard_id WHERE sh.deleted_student = '0' AND sc.school_id = '$school_id' AND sh.standard NOT IN (13, 19, 20, 21, 22, 23) AND sh.academic_year = '$academic_year'"; 
 
 }else{
-    $ctselect="SELECT sc.student_id, sc.admission_number, sc.student_name, sc.section, stdc.standard, sh.standard as std_id FROM student_creation sc JOIN student_history sh ON sc.student_id = sh.student_id JOIN standard_creation stdc ON sh.standard = stdc.standard_id WHERE sh.standard ='".$standard."' AND sh.section ='".$section."' AND sc.deleted_student = '0' AND sc.school_id = '$school_id' AND sh.standard NOT IN (13, 19, 20, 21, 22, 23) AND sh.academic_year = '$academic_year'"; 
+    $ctselect="SELECT sc.student_id, sc.admission_number, sc.student_name, sc.section, stdc.standard, sh.standard as std_id FROM student_creation sc JOIN student_history sh ON sc.student_id = sh.student_id JOIN standard_creation stdc ON sh.standard = stdc.standard_id WHERE sh.standard ='".$standard."' AND sh.section ='".$section."' AND sh.deleted_student = '0' AND sc.school_id = '$school_id' AND sh.standard NOT IN (13, 19, 20, 21, 22, 23) AND sh.academic_year = '$academic_year'"; 
 
 }
 $ctresult=$mysqli->query($ctselect);
