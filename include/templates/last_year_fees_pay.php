@@ -20,37 +20,47 @@ if(isset($_POST['submitpaylastyearfees']) && $_POST['submitpaylastyearfees'] != 
 {
     $studid = $_POST['admission_form_id'];
     $addLastYearFeesCreation = $userObj->addLastYearFees($mysqli,$userid,$school_id);  
-    if($addLastYearFeesCreation != 2){
+    if($addLastYearFeesCreation != '2'){
 ?>
-    <script>
-    setTimeout(() => {
-        print_temp_fees(<?php echo $addLastYearFeesCreation; ?>);
-    }, 1000);
-    // print functionality
-    function print_temp_fees(lastYearFeesid){
-    $.ajax({
-        url: 'ajaxFiles/last_year_fees_print.php',
-        cache: false,
-        type: 'POST',
-        data: {'lastYearFeesid': lastYearFeesid},
-        success: function(html){
-            var printWindow = window.open('', '_blank', 'height=800,width=1200');
+      <script>
+            setTimeout(() => {
+                print_temp_fees(<?php echo $addLastYearFeesCreation; ?>);
+            }, 1000);
 
-            if (printWindow) { // Check if the window is successfully opened
-                printWindow.document.write(html);
-                printWindow.document.close();
-                printWindow.print();
-                printWindow.close();
-            } else {
-                alert('Pop-up blocked. Please allow pop-ups for this site.');
+            function print_temp_fees(lastYearFeesid) {
+                // Open a new window or tab
+                var printWindow = window.open('', '_blank');
+
+                // Make sure the popup window is not blocked
+                if (printWindow) {
+                    // Load the content into the popup window
+                    $.ajax({
+                        url: 'ajaxFiles/last_year_fees_print.php',
+                        data: {
+                            'lastYearFeesid': lastYearFeesid
+                        },
+                        cache: false,
+                        type: "post",
+                        success: function(html) {
+                            // Write the content to the new window
+                            printWindow.document.open();
+                            printWindow.document.write(html);
+                            printWindow.document.close();
+
+                            // Optionally, print the content
+                            printWindow.print();
+                        },
+                        error: function() {
+                            // Handle error
+                            printWindow.close();
+                            alert('Failed to load print content.');
+                        }
+                    });
+                } else {
+                    alert('Popup blocked. Please allow popups for this website.');
+                }
             }
-        },
-        error: function () {
-            alert('Error loading print content.');
-        }
-    });
-    }
-</script>
+        </script>
 <?php
 }else{
 ?>
@@ -383,8 +393,6 @@ if(isset($_GET['upd'])){
                                                     <div class="form-group">
                                                     <select tabindex="1" type="text" class="form-control" id="cheque_ledger_name" name="cheque_ledger_name" tabindex="1" >
                                                         <option value="">Select ledger</option>   
-                                                        <option value="2022-2023">2022 - 2023</option> 
-                                                        <option value="2023-2024">2023 - 2024</option> 
                                                     </select>             
                                                     </div>
                                                 </td>
@@ -418,8 +426,6 @@ if(isset($_GET['upd'])){
                                                 <div class="form-group">
                                                 <select tabindex="1" type="text" class="form-control" id="neft_ledger_name" name="neft_ledger_name" tabindex="1" >
                                                     <option value="">Select Ledger</option>   
-                                                    <option value="2022-2023">2022 - 2023</option> 
-                                                    <option value="2023-2024">2023 - 2024</option> 
                                                 </select>             
                                                 </div>
                                             </td>

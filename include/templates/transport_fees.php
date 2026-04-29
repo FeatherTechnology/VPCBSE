@@ -17,38 +17,45 @@ if(isset($_GET['pagename']))
 if (isset($_POST['submittransportpay']) && $_POST['submittransportpay'] != '') {
     $studid = $_POST['admission_form_id'];
     $addTransportFeesCreation = $userObj->addTransportFees($mysqli, $userid, $school_id);
-    if ($addTransportFeesCreation != 2) {
+    if ($addTransportFeesCreation != '2') {
 ?>
-        <script>
-            // location.href = '<?php echo $HOSTPATH; ?>transport_fees&pagename=<?php echo $pagename; ?>&upd=<?php echo $studid; ?>';
+       <script>
             setTimeout(() => {
                 print_temp_fees(<?php echo $addTransportFeesCreation; ?>);
             }, 1000);
-            // print functionality
-            function print_temp_fees(transportFeesid) {
-                $.ajax({
-                    url: 'ajaxFiles/transport_fees_print.php',
-                    cache: false,
-                    type: 'POST',
-                    data: {
-                        'transportFeesid': transportFeesid
-                    },
-                    success: function(html) {
-                        var printWindow = window.open('', '_blank', 'height=800,width=1200');
 
-                        if (printWindow) { // Check if the window is successfully opened
+            function print_temp_fees(transportFeesid) {
+                // Open a new window or tab
+                var printWindow = window.open('', '_blank');
+
+                // Make sure the popup window is not blocked
+                if (printWindow) {
+                    // Load the content into the popup window
+                    $.ajax({
+                        url: 'ajaxFiles/transport_fees_print.php',
+                        data: {
+                            'transportFeesid': transportFeesid
+                        },
+                        cache: false,
+                        type: "post",
+                        success: function(html) {
+                            // Write the content to the new window
+                            printWindow.document.open();
                             printWindow.document.write(html);
                             printWindow.document.close();
+
+                            // Optionally, print the content
                             printWindow.print();
+                        },
+                        error: function() {
+                            // Handle error
                             printWindow.close();
-                        } else {
-                            alert('Pop-up blocked. Please allow pop-ups for this site.');
+                            alert('Failed to load print content.');
                         }
-                    },
-                    error: function() {
-                        alert('Error loading print content.');
-                    }
-                });
+                    });
+                } else {
+                    alert('Popup blocked. Please allow popups for this website.');
+                }
             }
         </script>
     <?php
@@ -325,8 +332,6 @@ if (isset($_GET['upd'])) {
                                                     <div class="form-group">
                                                         <select tabindex="1" type="text" class="form-control" id="cheque_ledger_name" name="cheque_ledger_name" tabindex="1">
                                                             <option value="">Select ledger</option>
-                                                            <option value="2022-2023">2022 - 2023</option>
-                                                            <option value="2023-2024">2023 - 2024</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -360,8 +365,6 @@ if (isset($_GET['upd'])) {
                                                     <div class="form-group">
                                                         <select tabindex="1" type="text" class="form-control" id="neft_ledger_name" name="neft_ledger_name" tabindex="1">
                                                             <option value="">Select Ledger</option>
-                                                            <option value="2022-2023">2022 - 2023</option>
-                                                            <option value="2023-2024">2023 - 2024</option>
                                                         </select>
                                                     </div>
                                                 </td>
